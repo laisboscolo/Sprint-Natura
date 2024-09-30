@@ -1,10 +1,9 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
 
 #container {
     display: flex;
     width: 100%;
-    flex-direction: column; /* Coloca os elementos em coluna */
+    flex-direction:column; /* Coloca os elementos em coluna */
     justify-content: center; /* Centraliza verticalmente */
     align-items: center; /* Centraliza horizontalmente */
     background-color: #F2A900; /* Cor de fundo da caixinha */
@@ -61,6 +60,7 @@ body{
         align-items: center; /* Centraliza horizontalmente */
         height: 100vh; /* Altura total da viewport */
         margin: 0; /* Remove margens padrão */
+
     }
 
     #form-login {
@@ -68,6 +68,22 @@ body{
         max-width: 600px; /* Largura máxima do formulário */
         margin: 0 auto; /* Centraliza o formulário na página */
         text-align: center; /* Centraliza o texto dentro do formulário */
+
+    }
+
+    
+       input[type=email],
+    input[type=password], 
+    #form-login input[type=text]
+ {
+        display: block; /* Mostra os campos como blocos */
+        border-bottom: 3px solid #F2A900; /* Borda inferior vermelha */
+        padding: 10px; /* Espaçamento interno */
+        margin: 0 auto 20px; /* Centraliza com margem inferior */
+        width: 80%; /* Largura do campo */
+        font-size: 16px; /* Tamanho da fonte */
+        font-family: 'Open sans', sans-serif; /* Fonte utilizada */
+        color: #DE884A; /* Cor do texto */
     }
     
     .logo-natura {
@@ -77,26 +93,42 @@ body{
         margin: 0 auto; /* Centraliza o logo */
     }
     
-    /* Estilo para os botões da seção de login */
-    .sessao-login-btn, form input[type=submit] {
-        background-color: #DE884A; /* Fundo amarelo */
-        color: #FFF; /* Texto branco */
-        text-decoration: none; /* Remove o sublinhado */
-        padding: 10px; /* Espaçamento interno */
-        transition: .5s; /* Transição suave ao interagir */
-        width: 100px; /* Largura fixa */
-        text-align: center; /* Centraliza o texto */
-        font-size: 100%; /* Tamanho de fonte padrão */
-        font-weight: bold; /* Negrito */
-        border: none; /* Remove bordas */
-        border-radius: 5%; /* Bordas arredondadas */
-        cursor: pointer; /* Muda o cursor para indicar clicável */
-        margin: 10px auto; /* Centraliza os botões com espaçamento */
-    }
+    .sessao-login-btn,
+form input[type=submit]{
+    background-color: #DE884A; /* Fundo dos botões */
+    color: #FFF; /* Texto branco */
+    text-decoration: none; /* Remove o sublinhado */
+    padding: 10px; /* Espaçamento interno */
+    transition: background-color 0.5s; /* Transição suave ao interagir */
+    width: 100px; /* Largura fixa */
+    text-align: center; /* Centraliza o texto */
+    font-size: 100%; /* Tamanho de fonte padrão */
+    font-weight: bold; /* Negrito */
+    border: none; /* Remove bordas */
+    border-radius: 5%; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor para indicar clicável */
+    margin: 10px auto; /* Centraliza os botões com espaçamento */
+}
     
+.sessao-login-btn-sair {
+    background-color: #DE884A; /* Fundo amarelo */
+    color: #FFF; /* Texto branco */
+    text-decoration: none; /* Remove o sublinhado */
+    padding: 10px; /* Espaçamento interno */
+    transition: .5s; /* Transição suave ao interagir */
+    width: 50px; /* Largura fixa */
+    text-align: center; /* Centraliza o texto */
+    font-size: 60%; /* Tamanho de fonte padrão */
+    font-weight: bold; /* Negrito */
+    border: none; /* Remove bordas */
+    border-radius: 5%; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor para indicar clicável */
+    margin: 10px auto; /* Centraliza os botões com espaçamento */
+}
+
 /* Estilo para o efeito hover nos botões */
 .sessao-login-btn:hover, form input[type=submit]:hover {
-	background-color: #F4BF25; /* Muda a cor de fundo ao passar o mouse */
+	background-color: #E16A13; /* Muda a cor de fundo ao passar o mouse */
 }
 
 #form-login {
@@ -110,7 +142,7 @@ body{
 #form-login input[type=email], 
 #form-contato textarea {
     display: block; /* Mostra os campos como blocos */
-    border-bottom: 3px solid #FA5252; /* Borda inferior vermelha */
+    border-bottom: 3px solid #E16A13; /* Borda inferior vermelha */
     padding: 10px; /* Espaçamento interno */
     margin: 0 auto 20px; /* Centraliza com margem inferior */
     width: 80%; /* Largura do campo */
@@ -118,6 +150,57 @@ body{
     font-family: 'Open sans', sans-serif; /* Fonte utilizada */
 }
 
-.border-box {
-    box-sizing: border-box;
+#border-box {
+    padding: 50px; /* Aumenta o espaçamento interno da caixa */
+    border-radius: 10px; /* Bordas arredondadas */
+    background-color: #E16A13; /* Cor de fundo da caixinha */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.container-cadastro {
+    background-color: #F2A900; /* Cor de fundo da caixinha */
+    width: 75%;
+    height: 30%; 
+    display: flex; /* Exibe os itens em linha */
+    flex-direction: row; /* Mantém os itens em linha */
+    justify-content: center;
+    align-items: center; /* Centraliza verticalmente */
+    margin: 10px 0; /* Adiciona margem vertical */
+    border-radius: 30px;
+}
+
+.item {
+    width: 150px; /* Largura menor dos botões */
+    height: 70px; /* Altura menor dos botões */
+    margin: 15px; /* Espaçamento entre os itens */
+    background-color: #DE884A; /* Cor do botão */
+    color: white; /* Cor do texto */
+    font-size: 20px; /* Tamanho da fonte */
+    display: flex; /* Permite o alinhamento interno */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-decoration: none; /* Remove sublinhado */
+    border: none; /* Remove borda */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    transition: background-color 0.5s; 
+    border-radius: 20px; /* Bordas arredondadas */
+}
+
+.item:hover {
+    background-color: #EEC872; /* Muda a cor ao passar o mouse */
+}
+
+.sessao-login-btn-sair {
+    display: inline-block; /* Para que o link se comporte como um botão */
+    background-color: #DE884A; /* Cor do botão */
+    color: white; /* Cor do texto */
+    padding: 10px; /* Espaçamento interno */
+    text-decoration: none; /* Remove sublinhado */
+    border-radius: 80px; /* Bordas arredondadas */
+    transition: background-color 0.5s; 
+}
+
+.sessao-login-btn-sair:hover {
+    background-color: #EEC872; /* Muda a cor ao passar o mouse */
+
 }
