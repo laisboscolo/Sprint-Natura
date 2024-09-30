@@ -1,15 +1,24 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
 
-.container {
-    display: flex; /* or inline-flex */
-  }
+#container {
+    display: flex;
+    width: 100%;
+    flex-direction: column; /* Coloca os elementos em coluna */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    background-color: #F2A900; /* Cor de fundo da caixinha */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
 
 /* Define o estilo do corpo da página */
 body{
 	font-family: "Cabin", sans-serif; /* Aplica a fonte importada */
 	color: #FFF; /* Define a cor do texto como branco */
-	background-color: #EB6619; /* Define o fundo da página como laranja */
+	background-color: #E16A13; /* Define o fundo da página como laranja */
 }
 /* fonte-importada  */
 .katibeh-regular {
@@ -70,7 +79,7 @@ body{
     
     /* Estilo para os botões da seção de login */
     .sessao-login-btn, form input[type=submit] {
-        background-color: #F2A900; /* Fundo amarelo */
+        background-color: #DE884A; /* Fundo amarelo */
         color: #FFF; /* Texto branco */
         text-decoration: none; /* Remove o sublinhado */
         padding: 10px; /* Espaçamento interno */
@@ -104,7 +113,7 @@ body{
     border-bottom: 3px solid #FA5252; /* Borda inferior vermelha */
     padding: 10px; /* Espaçamento interno */
     margin: 0 auto 20px; /* Centraliza com margem inferior */
-    width: 50%; /* Largura do campo */
+    width: 80%; /* Largura do campo */
     font-size: 16px; /* Tamanho da fonte */
     font-family: 'Open sans', sans-serif; /* Fonte utilizada */
 }
