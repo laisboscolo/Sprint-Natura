@@ -73,7 +73,8 @@ body{
 
     
        input[type=email],
-    input[type=password], 
+       input[type=password],
+       input[type=tel],
     #form-login input[type=text]
  {
         display: block; /* Mostra os campos como blocos */
