@@ -205,3 +205,27 @@ form input[type=submit]{
     background-color: #EEC872; /* Muda a cor ao passar o mouse */
 
 }
+
+.listagem {
+    text-decoration: none; /* Remove sublinhado */
+    color: #FFF;
+}
+.listagem-nao {
+    text-decoration: none; /* Remove sublinhado */
+    color:#D22424;
+    transition: background-color 0.5s; 
+}
+.listagem-nao:hover {
+    color: #D05858; /* Muda a cor ao passar o mouse */
+
+}
+
+.cadastrando {
+    font-size: 18px;
+    color: #fff;
+    text-shadow: #D22424;
+}
+
+.h1-cadastro{
+    font-size: 30px;
+}
