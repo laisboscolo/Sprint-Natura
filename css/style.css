@@ -1,5 +1,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
+
+.container {
+    display: flex; /* or inline-flex */
+  }
+
 /* Define o estilo do corpo da página */
 body{
 	font-family: "Cabin", sans-serif; /* Aplica a fonte importada */
@@ -27,66 +32,59 @@ body{
     cursor: pointer;
 }
 
+
 .destaqueTexto input:hover{
     background-color: black;
     color: #fff;
 }
 
+#logo-inicial {
+    width: 300px;
+    height: 500px;
+}
+
     /* Estilos para a barra lateral (sidebar) */
-
-#login{
-
-	position: center; /* Fixa a sidebar na tela, independente do scroll */
-	height: 100%; /* Define a altura total da página */
-	width: 300px; /* Define a largura da sidebar */
-	background-color: #FA5252; /* Cor de fundo vermelho */
-	padding-top: 40px; /* Espaçamento superior da sidebar */
-}
-
-/* Estilo do título (h1) dentro da sidebar */
-#form-login {
-
-    width: 100%; /* ou outra largura desejada */
-    max-width: 600px; /* largura máxima do formulário */
-    margin: 0 auto; /* centraliza o formulário na página */
-    text-align: center; /* centraliza o texto dentro do formulário */
-}
-
-#form-login {
     
-    width: 100%; /* ou outra largura desejada */
-    max-width: 600px; /* largura máxima do formulário */
-    margin: 0 auto; /* centraliza o formulário na página */
-    text-align: center; /* opcional: centraliza o texto dentro do formulário */
-}
-.logo-natura {
-	width: 95px; /* Define largura da imagem do logo */
-	height: 80px; /* Define altura da imagem */
-	display: block; /* Exibe como bloco */
-	position: relative;
-	margin-left: auto;
-	margin-right: auto; /* Centraliza o logo */
-}
+    #login {
+        display: flex;
+        flex-direction: column; /* Alinha os elementos em coluna */
+        justify-content: center; /* Centraliza verticalmente */
+        align-items: center; /* Centraliza horizontalmente */
+        height: 100vh; /* Altura total da viewport */
+        margin: 0; /* Remove margens padrão */
+    }
 
-/* Estilo para os botões da seção de login*/
-
-.sessao-login-btn, form input[type=submit] {
-    text-align: center;
-	background-color: #F2A900; /* Fundo vermelho */
-	color: #FFF; /* Texto branco */
-	text-decoration: none; /* Remove o sublinhado */
-	padding: 10px; /* Espaçamento interno */
-	transition: .5s; /* Transição suave ao interagir */
-	width: 100px; /* Largura fixa */
-	text-align: center; /* Centraliza o texto */
-	font-size: 100%; /* Tamanho de fonte padrão */
-	font-weight: bold; /* Negrito */
-	border: none; /* Remove bordas */
-	border-radius: 5%; /* Bordas arredondadas */
-	cursor: pointer; /* Muda o cursor para indicar clicável */
-	margin-left: 25px; /* Espaçamento à esquerda */
-}
-
+    #form-login {
+        width: 100%; /* Largura total */
+        max-width: 600px; /* Largura máxima do formulário */
+        margin: 0 auto; /* Centraliza o formulário na página */
+        text-align: center; /* Centraliza o texto dentro do formulário */
+    }
+    
+    .logo-natura {
+        width: 190px; /* Define largura da imagem do logo */
+        height: 160px; /* Define altura da imagem */
+        display: block; /* Exibe como bloco */
+        margin: 0 auto; /* Centraliza o logo */
+    }
+    
+    /* Estilo para os botões da seção de login */
+    .sessao-login-btn, form input[type=submit] {
+        background-color: #F2A900; /* Fundo amarelo */
+        color: #FFF; /* Texto branco */
+        text-decoration: none; /* Remove o sublinhado */
+        padding: 10px; /* Espaçamento interno */
+        transition: .5s; /* Transição suave ao interagir */
+        width: 100px; /* Largura fixa */
+        text-align: center; /* Centraliza o texto */
+        font-size: 100%; /* Tamanho de fonte padrão */
+        font-weight: bold; /* Negrito */
+        border: none; /* Remove bordas */
+        border-radius: 5%; /* Bordas arredondadas */
+        cursor: pointer; /* Muda o cursor para indicar clicável */
+        margin: 10px auto; /* Centraliza os botões com espaçamento */
+    }
+    
 /* Estilo para o efeito hover nos botões */
 .sessao-login-btn:hover, form input[type=submit]:hover {
 	background-color: #F4BF25; /* Muda a cor de fundo ao passar o mouse */
@@ -109,4 +107,8 @@ body{
     width: 50%; /* Largura do campo */
     font-size: 16px; /* Tamanho da fonte */
     font-family: 'Open sans', sans-serif; /* Fonte utilizada */
+}
+
+.border-box {
+    box-sizing: border-box;
 }
