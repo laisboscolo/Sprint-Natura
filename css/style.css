@@ -256,3 +256,8 @@ tr:hover {
     display: flex;
     gap: 10px;
 }
+.p-cadastro {
+    font-size: 20px;
+    color:#D22424;
+    background-color: #EEC872;
+}
