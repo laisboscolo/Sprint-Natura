@@ -39,4 +39,4 @@ Agradecemos aos orientadores que contribuiram neste projeto:
 * Raul Porto Lopes
 
 
-*Trabalho pedagógico*
+*TRABALHO PEDAGÓGICO*
