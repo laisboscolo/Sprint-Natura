@@ -44,6 +44,7 @@ Agradecemos aos orientadores que contribuiram neste projeto:
 
 <br>
 <br>
+
 * Figma:
 
 https://www.figma.com/design/pv6ffjiq7EZLZLlt44vLWq/Untitled?node-id=2-5
