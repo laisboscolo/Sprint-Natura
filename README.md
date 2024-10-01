@@ -19,10 +19,15 @@ Aqui está a equipe que desenvolveu este projeto:
 Giovanna Oliveira
 
 ![image](https://github.com/user-attachments/assets/4a6f2da5-b54d-4247-81fc-d8a36d809ecd)
+
 Isabelli Nardin
+
 ![image](https://github.com/user-attachments/assets/1dbe1d56-57b6-4e6b-bf24-c63f2c9d6760)
+
 Julia Daniluski 
+
 ![image](https://github.com/user-attachments/assets/c5b37384-a981-4c0b-870c-523ffe0292bb)
+
 Laís Boscolo 
 
 
