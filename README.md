@@ -15,7 +15,9 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 Aqui está a equipe que desenvolveu este projeto:
 
 ![image](https://github.com/user-attachments/assets/5ae087d0-af12-4bf8-a9b6-a5f6567513f6)
+
 Giovanna Oliveira
+
 ![image](https://github.com/user-attachments/assets/4a6f2da5-b54d-4247-81fc-d8a36d809ecd)
 Isabelli Nardin
 ![image](https://github.com/user-attachments/assets/1dbe1d56-57b6-4e6b-bf24-c63f2c9d6760)
