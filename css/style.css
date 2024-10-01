@@ -1,113 +1,107 @@
 @import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
 
+/* Estilo do corpo da página */
+body {
+    font-family: "Cabin", sans-serif;
+    color: #FFF;
+    background-color: #E16A13;
+}
+
+/* "Caixa" onde os elementos ficam organizados */
 #container {
     display: flex;
-    width: 100%;
-    flex-direction:column; /* Coloca os elementos em coluna */
+    flex-direction: column; /* Coloca os elementos em coluna */
     justify-content: center; /* Centraliza verticalmente */
     align-items: center; /* Centraliza horizontalmente */
     background-color: #F2A900; /* Cor de fundo da caixinha */
     padding: 20px; /* Espaçamento interno */
     border-radius: 8px; /* Bordas arredondadas */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    width: 90%; /* Ajusta a largura para ser responsiva */
+    max-width: 800px; /* Define uma largura máxima */
+    margin: auto; /* Centraliza horizontalmente */
 }
 
-
-/* Define o estilo do corpo da página */
-body{
-	font-family: "Cabin", sans-serif; /* Aplica a fonte importada */
-	color: #FFF; /* Define a cor do texto como branco */
-	background-color: #E16A13; /* Define o fundo da página como laranja */
-}
-/* fonte-importada  */
+/* Fonte importada */
 .katibeh-regular {
     font-family: "Katibeh", serif;
-    font-weight: 400;
-    font-style: normal;
 }
-  
-.destaqueTexto input{
+
+/* Estilo dos botões */
+.destaqueTexto input {
     background-color: #e30613;
-    padding: 5px 15px 1px;
+    padding: 5px 15px;
     color: #fff;
-    text-decoration: none;
     border-radius: 10px;
     font-weight: bold;
-    width: 100px;
+    width: 80%; /* A largura agora é responsiva */
+    max-width: 100px; /* Largura máxima */
     height: 30px;
-    margin: 5px 75px;
+    margin: 5px auto; /* Centraliza os botões */
     border: 0;
     cursor: pointer;
 }
 
-
-.destaqueTexto input:hover{
+.destaqueTexto input:hover {
     background-color: black;
-    color: #fff;
 }
 
 #logo-inicial {
-    width: 300px;
-    height: 500px;
+    width: 100%; /* Largura responsiva */
+    max-width: 300px; /* Define uma largura máxima */
+    height: auto; /* Mantém a proporção */
 }
 
+/* Estilos para a barra lateral (sidebar) */
+#login {
+    display: flex;
+    flex-direction: column; /* Alinha os elementos em coluna */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    height: 100vh; /* Altura total da viewport */
+    margin: 0; /* Remove margens padrão */
+}
 
-    /* Estilos para a barra lateral (sidebar) */
-    
-    #login {
-        display: flex;
-        flex-direction: column; /* Alinha os elementos em coluna */
-        justify-content: center; /* Centraliza verticalmente */
-        align-items: center; /* Centraliza horizontalmente */
-        height: 100vh; /* Altura total da viewport */
-        margin: 0; /* Remove margens padrão */
+#form-login {
+    width: 90%; /* Ajusta a largura */
+    max-width: 600px; /* Largura máxima do formulário */
+    margin: 0 auto; /* Centraliza o formulário na página */
+    text-align: center; /* Centraliza o texto dentro do formulário */
+}
 
-    }
+/* Estilos para inputs */
+input[type=email],
+input[type=password],
+input[type=tel],
+#form-login input[type=text] {
+    display: block; /* Mostra os campos como blocos */
+    border-bottom: 3px solid #F2A900; /* Borda inferior */
+    padding: 10px; /* Espaçamento interno */
+    margin: 0 auto 20px; /* Centraliza com margem inferior */
+    width: 80%; /* Largura do campo */
+    max-width: 300px; /* Largura máxima */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Open sans', sans-serif; /* Fonte utilizada */
+    color: #DE884A; /* Cor do texto */
+}
 
-    #form-login {
-        width: 100%; /* Largura total */
-        max-width: 600px; /* Largura máxima do formulário */
-        margin: 0 auto; /* Centraliza o formulário na página */
-        text-align: center; /* Centraliza o texto dentro do formulário */
+.logo-natura {
+    display: block; /* Faz a imagem ser tratada como bloco */
+    margin: 0 auto; /* Centraliza a imagem */
+    width: 80%; /* Ajuste a largura conforme necessário */
+    max-width: 300px; /* Define uma largura máxima */
+    height: auto; /* Mantém a proporção da imagem */
+}
 
-    }
-
-    
-       input[type=email],
-       input[type=password],
-       input[type=tel],
-    #form-login input[type=text]
- {
-        display: block; /* Mostra os campos como blocos */
-        border-bottom: 3px solid #F2A900; /* Borda inferior vermelha */
-        padding: 10px; /* Espaçamento interno */
-        margin: 0 auto 20px; /* Centraliza com margem inferior */
-        width: 80%; /* Largura do campo */
-        font-size: 16px; /* Tamanho da fonte */
-        font-family: 'Open sans', sans-serif; /* Fonte utilizada */
-        color: #DE884A; /* Cor do texto */
-    }
-    
-    .logo-natura {
-        display: block; /* Faz a imagem ser tratada como bloco */
-        margin: 0 auto; /* Centraliza a imagem */
-        width: 80%; /* Ajuste a largura conforme necessário */
-        max-width: 300px; /* Define uma largura máxima */
-        height: auto; /* Mantém a proporção da imagem */
-        position: relative; /* Permite o uso de posicionamento */
-        top: 0; /* Garante que a imagem não se desloque para cima ou para baixo */
-    }
-    
-    
-
-    .sessao-login-btn,
-form input[type=submit]{
+/* Estilos para botões */
+.sessao-login-btn,
+form input[type=submit] {
     background-color: #DE884A; /* Fundo dos botões */
     color: #FFF; /* Texto branco */
-    text-decoration: none; /* Remove o sublinhado */
     padding: 10px; /* Espaçamento interno */
     transition: background-color 0.5s; /* Transição suave ao interagir */
-    width: 100px; /* Largura fixa */
+    width: 80%; /* Largura responsiva */
+    max-width: 100px; /* Largura máxima */
     text-align: center; /* Centraliza o texto */
     font-size: 100%; /* Tamanho de fonte padrão */
     font-weight: bold; /* Negrito */
@@ -116,14 +110,14 @@ form input[type=submit]{
     cursor: pointer; /* Muda o cursor para indicar clicável */
     margin: 10px auto; /* Centraliza os botões com espaçamento */
 }
-    
+
 .sessao-login-btn-sair {
     background-color: #DE884A; /* Fundo amarelo */
     color: #FFF; /* Texto branco */
-    text-decoration: none; /* Remove o sublinhado */
     padding: 10px; /* Espaçamento interno */
     transition: .5s; /* Transição suave ao interagir */
-    width: 50px; /* Largura fixa */
+    width: 80%; /* Largura responsiva */
+    max-width: 50px; /* Largura máxima */
     text-align: center; /* Centraliza o texto */
     font-size: 60%; /* Tamanho de fonte padrão */
     font-weight: bold; /* Negrito */
@@ -134,50 +128,50 @@ form input[type=submit]{
 }
 
 /* Estilo para o efeito hover nos botões */
-.sessao-login-btn:hover, form input[type=submit]:hover {
-	background-color: #E16A13; /* Muda a cor de fundo ao passar o mouse */
+.sessao-login-btn:hover,
+form input[type=submit]:hover {
+    background-color: #E16A13; /* Muda a cor de fundo ao passar o mouse */
 }
 
-#form-login {
-    width: 100%; /* ou outra largura desejada */
-    max-width: 600px; /* largura máxima do formulário */
-    margin: 0 auto; /* centraliza o formulário na página */
-    text-align: center; /* opcional: centraliza o texto dentro do formulário */
-}
-
-#form-login input[type=text], 
-#form-login input[type=email], 
-#form-contato textarea {
-    display: block; /* Mostra os campos como blocos */
-    border-bottom: 3px solid #E16A13; /* Borda inferior vermelha */
-    padding: 10px; /* Espaçamento interno */
-    margin: 0 auto 20px; /* Centraliza com margem inferior */
-    width: 80%; /* Largura do campo */
-    font-size: 16px; /* Tamanho da fonte */
-    font-family: 'Open sans', sans-serif; /* Fonte utilizada */
-}
-
-#border-box {
-    padding: 50px; /* Aumenta o espaçamento interno da caixa */
-    border-radius: 10px; /* Bordas arredondadas */
-    background-color: #E16A13; /* Cor de fundo da caixinha */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+/* Ajustes de responsividade com media queries */
+@media (max-width: 768px) {
+    #container {
+        padding: 10px; /* Ajusta o padding */
+    }
+    
+    .destaqueTexto input,
+    .sessao-login-btn,
+    form input[type=submit],
+    .sessao-login-btn-sair {
+        width: 90%; /* Aumenta a largura dos botões em telas menores */
+        max-width: none; /* Remove a largura máxima */
+    }
+    
+    .item {
+        width: 80%; /* Largura maior para itens em telas menores */
+        max-width: none; /* Remove a largura máxima */
+    }
+    
+    #logo-inicial {
+        width: 100%; /* Largura completa em dispositivos menores */
+        max-width: 200px; /* Limita a largura máxima */
+    }
 }
 
 .container-cadastro {
     background-color: #F2A900; /* Cor de fundo da caixinha */
-    width: 75%;
-    height: 30%; 
+    width: 90%; /* Ajusta a largura para ser responsiva */
+    max-width: 800px; /* Largura máxima */
     display: flex; /* Exibe os itens em linha */
     flex-direction: row; /* Mantém os itens em linha */
     justify-content: center;
     align-items: center; /* Centraliza verticalmente */
-    margin: 10px 0; /* Adiciona margem vertical */
+    margin: 10px auto; /* Adiciona margem vertical e centraliza */
     border-radius: 30px;
     position: relative; /* Permite o uso de posicionamento */
-    top: 0; /* Garante que a imagem não se desloque para cima ou para baixo */
 }
 
+/* Estilo dos itens do cadastro */
 .item {
     width: 150px; /* Largura menor dos botões */
     height: 70px; /* Altura menor dos botões */
@@ -211,21 +205,21 @@ form input[type=submit]{
 
 .sessao-login-btn-sair:hover {
     background-color: #EEC872; /* Muda a cor ao passar o mouse */
-
 }
 
 .listagem {
     text-decoration: none; /* Remove sublinhado */
     color: #FFF;
 }
+
 .listagem-nao {
     text-decoration: none; /* Remove sublinhado */
-    color:#D22424;
+    color: #D22424;
     transition: background-color 0.5s; 
 }
+
 .listagem-nao:hover {
     color: #D05858; /* Muda a cor ao passar o mouse */
-
 }
 
 .cadastrando {
@@ -234,12 +228,13 @@ form input[type=submit]{
     text-shadow: #D22424;
 }
 
-.h1-cadastro{
+.h1-cadastro {
     font-size: 30px;
 }
+
 table {
     width: 100%;
-    border-collapse:separate;
+    border-collapse: separate;
     margin-top: 20px;
     background-color: #f3b938;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -252,7 +247,7 @@ th, td {
 }
 
 th {
-    background-color:#D22424;
+    background-color: #D22424;
     color: white;
 }
 
@@ -264,14 +259,16 @@ tr:hover {
     display: flex;
     gap: 10px;
 }
+
 .p-cadastro {
     font-size: 20px;
-    color:#D22424;
+    color: #D22424;
     background-color: #EEC872;
 }
+
 .tabela-listagem {
     margin: 0 auto; /* Centraliza a tabela na página */
     text-align: center; /* Centraliza o texto dentro das células */
-    width: 80%; /* Define a largura da tabela */
-    display: table; /* Garante que a tabela seja tratada como um elemento de tabela */
+    width: 90%; /* Ajusta a largura da tabela */
+    max-width: 800px; /* Largura máxima */
 }
