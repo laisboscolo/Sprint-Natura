@@ -41,3 +41,9 @@ Agradecemos aos orientadores que contribuiram neste projeto:
 
 
 *TRABALHO PEDAGÓGICO*
+
+<br>
+<br>
+*Figma:
+
+https://www.figma.com/design/pv6ffjiq7EZLZLlt44vLWq/Untitled?node-id=2-5
