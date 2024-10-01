@@ -1,6 +1,9 @@
 # Sprint Natura
- 
-Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
+
+![image](https://github.com/user-attachments/assets/3d5887cf-03a5-49e9-a06b-a98c5fe038f1)
+
+Esse trabalho pretende por meio de códigos e programação, desenvolver um website adaptado para diferentes interfaces e dispositivos que sirva para cadastro e mantenha dados guardados, assim como solicitado pela empresa “Natura”. 
+
 
 Ajustes e melhorias
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
