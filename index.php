@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -31,5 +32,9 @@
      </section>
             </div>
  </div>
+ <div>         <?php
+         include 'read.php';
+        ?>
+        </div>
 </body>
 </html>
