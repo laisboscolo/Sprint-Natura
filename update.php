@@ -1,81 +1,74 @@
 <?php
-include 'conexao.php'; // Inclui o arquivo de conexão
+// Conexão com o banco de dados
+include 'conexao.php';
 
-if (isset($_GET['id'])) { // Verifica se o ID foi passado
-    $id = $_GET['id']; // Recebe o ID
-    $sql = "SELECT * FROM usuarios WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id); // Bind do ID como inteiro
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $usuario = $result->fetch_assoc(); // Obtém os dados do usuário
-
-    // Verifica se o usuário existe
-    if (!$usuario) {
-        echo "Usuário não encontrado.";
-        exit();
+if (isset($_GET['id'])) {
+    $id_fornecedor = $_GET['id'];
+    
+    // Recuperando os dados do fornecedor a ser editado
+    $sql = "SELECT * FROM fornecedor WHERE id_fornecedor = ?";
+    
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $id_fornecedor);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+        } else {
+            echo "Fornecedor não encontrado!";
+            exit();
+        }
+        
+        $stmt->close();
     }
+} else {
+    echo "ID não especificado!";
+    exit();
 }
 
-// Se o formulário foi enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recebe os dados do formulário
-    $nome = trim($_POST['nome']);
-    $email = trim($_POST['email']);
-    $password = trim($_POST['senha']);
-
-    // Validação simples de campos
-    if (empty($nome) || empty($email)) {
-        echo "Nome e e-mail são obrigatórios.";
-        exit();
-    }
-
-    // Se a senha foi fornecida, criptografa antes de atualizar
-    if (!empty($password)) {
-        $password = password_hash($password, PASSWORD_DEFAULT);
-        // Atualiza a senha no banco de dados, junto com o nome e email
-        $sql = "UPDATE usuarios SET nome=?, email=?, password=? WHERE id=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssi", $nome, $email, $password, $id); // Bind de parâmetros com a senha
-    } else {
-        // Se a senha não foi fornecida, não altere o campo de senha
-        $sql = "UPDATE usuarios SET nome=?, email=? WHERE id=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssi", $nome, $email, $id); // Bind sem senha
-    }
-
-    // Executa a query e verifica se a atualização foi bem-sucedida
-    if ($stmt->execute()) {
-        header("Location: index.php"); // Redireciona se a atualização for bem-sucedida
-        exit(); // Certifica-se de que o código não continua executando
-    } else {
-        echo "Erro: " . $stmt->error; // Mostra erro, se houver
-    }
-}
+$conn->close();
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<link rel="stylesheet" href="style.css">
-<head>
-    <meta charset="UTF-8">
-    <title>Atualizar Usuário</title>
-</head>
-<body>
-    <h1>Atualizar Usuário</h1>
-    <form action="" method="POST">
-        <label>Nome:</label>
-        <input type="text" name="nome" value="<?php echo htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8'); ?>" required>
-        
-        <label>Email:</label>
-        <input type="email" name="email" value="<?php echo htmlspecialchars($usuario['email'], ENT_QUOTES, 'UTF-8'); ?>" required>
-        
-        <label>Senha:</label>
-        <input type="password" name="senha" placeholder="Nova Senha">
-        
-        <input type="submit" value="Atualizar">
-    </form>
+<!-- Formulário para editar fornecedor -->
+<form action="editar.php" method="POST">
+    <input type="hidden" name="id_fornecedor" value="<?php echo $row['id_fornecedor']; ?>">
+
+    <label for="nome_fornecedor">Nome:</label>
+    <input type="text" name="nome_fornecedor" value="<?php echo $row['nome_fornecedor']; ?>" required><br><br>
+
+    <label for="email_fornecedor">Email:</label>
+    <input type="email" name="email_fornecedor" value="<?php echo $row['email_fornecedor']; ?>" required><br><br>
+
+    <label for="telefone_fornecedor">Telefone:</label>
+    <input type="text" name="telefone_fornecedor" value="<?php echo $row['telefone_fornecedor']; ?>" required><br><br>
+
+    <button type="submit" name="update">Atualizar</button>
+</form>
+
+<?php
+// Processa o envio do formulário para atualizar o fornecedor
+if (isset($_POST['update'])) {
+    $id_fornecedor = $_POST['id_fornecedor'];
+    $nome_fornecedor = $_POST['nome_fornecedor'];
+    $email_fornecedor = $_POST['email_fornecedor'];
+    $telefone_fornecedor = $_POST['telefone_fornecedor'];
+
+    // Atualizando os dados do fornecedor
+    $sql = "UPDATE fornecedor SET nome_fornecedor='$nome_fornecedor', email_fornecedor='$email_fornecedor', telefone_fornecedor='$telefone_fornecedor' WHERE id_fornecedor=$id_fornecedor";
     
-    <a href="index.php">Cancelar</a> <!-- Link para voltar -->
-</body>
-</html>
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("sssi", $nome_fornecedor, $email_fornecedor, $telefone_fornecedor, $id_fornecedor);
+        
+        if ($stmt->execute()) {
+            echo "Fornecedor atualizado com sucesso!";
+        } else {
+            echo "Erro ao atualizar fornecedor: " . $conn->error;
+        }
+        
+        $stmt->close();
+    }
+
+    $conn->close();
+}
+?>

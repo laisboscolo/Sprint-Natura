@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
-                <!-- link do favicon-->
-                <link rel="shortcut icon" href="img/natura-108.png">
+    <!-- link do favicon-->
+    <link rel="shortcut icon" href="img/natura-108.png">
     <title>Natura</title>
 </head>
 <body>   
@@ -21,20 +20,32 @@
                 <h2>SISTEMA DE CADASTRO</h2>
                 <h3>Bem-vindo administrador(a)</h3>
                 <div class="container-cadastro">
-                    <a href="Cadastrodeprodutos.html" class="item">Cadastro de produtos</a>
-                    <a href="Cadastrodefornecedores.html" class="item">Cadastro de fornecedores</a>
-                    <a href="listagemdeprodutos.html" class="item">Listagem de produtos</a>
+                    <a href="Cadastrodeprodutos.php" class="item">Cadastro de produtos</a>
+                    <a href="Cadastrodefornecedores.php" class="item">Cadastro de fornecedores</a>
+                    <a href="listagemdeprodutos.php" class="item">Listagem de produtos</a>
                 </div>
-                <a href="login.html" class="sessao-login-btn-sair">Voltar</a>
+                <a href="login.php" class="sessao-login-btn-sair">Voltar</a>
             </section>
         </form>
     </div>
-     </section>
-            </div>
- </div>
- <div>         <?php
-         include 'read.php';
+
+    <!-- PHP para Conexão e Leitura -->
+    <div>
+        <?php
+        include 'conexao.php';
+        if ($conn->connect_error) {
+            die("Conexão falhou: " . $conn->connect_error);
+        }
+
+        $result = $conn->query("SHOW TABLES LIKE 'usuarios'");
+
+        if ($result->num_rows > 0) {
+            include 'read.php'; 
+        } else {
+            echo "<p style='color:red;'>Erro: A tabela 'usuarios' não existe no banco de dados.</p>";
+        }
+        $conn->close();
         ?>
-        </div>
+    </div>
 </body>
 </html>
