@@ -1,13 +1,14 @@
-<?php
-include 'conexao.php'; // Variável para a conexão com o banco
 
+<?php
 // Conexão com o banco de dados
-$servername = "localhost";  
-$username = "root";         
-$password = "";             
-$dbname = "natura"; // Nome do seu banco de dados
+include 'conexao.php'; // Inclua o arquivo de conexão
 
 // Criando a conexão
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "natura"; // Nome do seu banco de dados
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificando se houve erro na conexão
@@ -15,35 +16,71 @@ if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
+// Verificando se o formulário foi submetido
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Pegando os dados do formulário
-    $fornecedor = $_POST['id_fornecedor']; 
-    $nome_produto = $_POST['nome_produto'];
-    $descricao_produto = $_POST['descricao_produto'];
-    $valor_produto = $_POST['valor_produto'];
+    // Pegando os dados do formulário e validando
+    $nome_fornecedor = mysqli_real_escape_string($conn, $_POST['nome_fornecedor']);
+    $email_fornecedor = mysqli_real_escape_string($conn, $_POST['email_fornecedor']);
+    $telefone_fornecedor = mysqli_real_escape_string($conn, $_POST['telefone_fornecedor']);
 
-    // Utilizando prepared statement para evitar SQL Injection
-    $stmt = $conn->prepare("INSERT INTO produto (id_fornecedor, nome_produto, descricao_produto, valor_produto) 
-                            VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("issd", $fornecedor, $nome_produto, $descricao_produto, $valor_produto);
+    // Inserindo os dados na tabela fornecedor usando prepared statement
+    $sql = "INSERT INTO fornecedor (nome_fornecedor, email_fornecedor, telefone_fornecedor) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $nome_fornecedor, $email_fornecedor, $telefone_fornecedor);
 
     if ($stmt->execute()) {
-        // Recuperando o ID do produto gerado automaticamente
-        $id_produto = $conn->insert_id;
-
-        // Exibindo os dados cadastrados
-        echo "<h2>Produto cadastrado com sucesso!</h2>";
-        echo "<p>ID Produto: $id_produto</p>";
-        echo "<p>Fornecedor (ID): $fornecedor</p>";
-        echo "<p>Nome do Produto: $nome_produto</p>";
-        echo "<p>Descrição: $descricao_produto</p>";
-        echo "<p>Preço: R$ $valor_produto</p>";
+        echo "<h2>Fornecedor cadastrado com sucesso!</h2>";
+        
+        // Exibindo os registros após o cadastro
+        echo "<h3>Fornecedores Cadastrados:</h3>";
+        $sql = "SELECT * FROM fornecedor";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            echo "<table border='1'>";
+            echo "<tr><th>ID</th><th>Nome</th><th>Email</th><th>Telefone</th><th>Ações</th></tr>";
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>
+                        <td>" . $row['id_fornecedor'] . "</td>
+                        <td>" . $row['nome_fornecedor'] . "</td>
+                        <td>" . $row['email_fornecedor'] . "</td>
+                        <td>" . $row['telefone_fornecedor'] . "</td>
+                        <td>
+                            <a href=''>Editar</a> |
+                            <a href=''>Excluir</a>
+                        </td>
+                      </tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "<p>Nenhum fornecedor cadastrado!</p>";
+        }
+        
     } else {
-        echo "Erro ao cadastrar o produto: " . $conn->error;
+        echo "Erro ao cadastrar fornecedor: " . $stmt->error;
     }
 
-    // Fechar o prepared statement
     $stmt->close();
+}
+
+// Exclusão de fornecedor
+if (isset($_GET['delete']) && !empty($_GET['delete'])) {
+    $id_fornecedor = $_GET['delete'];
+    
+    // Proteção contra SQL Injection
+    $id_fornecedor = (int)$id_fornecedor;  // Certificando que é um número inteiro
+    
+    // Preparando a consulta de exclusão
+    $sql_delete = "DELETE FROM fornecedor WHERE id_fornecedor = ?";
+    $stmt_delete = $conn->prepare($sql_delete);
+    $stmt_delete->bind_param("i", $id_fornecedor);
+
+    if ($stmt_delete->execute()) {
+        echo "<p>Fornecedor excluído com sucesso.</p>";
+    } else {
+        echo "<p>Erro ao excluir fornecedor.</p>";
+    }
+
+    $stmt_delete->close();
 }
 
 // Fechar a conexão
@@ -62,7 +99,7 @@ $conn->close();
 </head>
 <body>
   <div id="border-box">
-    <form id="form-login" method="POST"> 
+    <form id="form-login" method="POST" action="https://formspree.io/f/mwkaywbn"> <!-- Formulário agora envia para Formspree -->
         <section id="login">
             <!-- Logotipo Natura -->
             <img class="logo-natura" src="img/natura-branco.png" alt="Logo Natura">
@@ -73,26 +110,24 @@ $conn->close();
                 <p class="cadastrando">Cadastro de produtos</p>
 
                 <!-- Formulário de cadastro de produto -->
-                <form action="https://formspree.io/f/mqakyayg" method="POST">
-             <h2>Fornecedor (ID)</h2>
-             <input type="number" name="id_fornecedor" placeholder="ID do fornecedor" required>
+                <h2>Fornecedor (ID)</h2>
+                <input type="number" name="id_fornecedor" placeholder="ID do fornecedor" required>
 
-    <h2>Nome do Produto</h2>
-    <input type="text" name="nome_produto" placeholder="Digite o nome do produto..." required>
+                <h2>Nome do Produto</h2>
+                <input type="text" name="nome_produto" placeholder="Digite o nome do produto..." required>
 
-    <h2>Descrição</h2>
-    <input type="text" name="descricao_produto" placeholder="Digite a descrição..." required>
+                <h2>Descrição</h2>
+                <input type="text" name="descricao_produto" placeholder="Digite a descrição..." required>
 
-    <h2>Preço</h2>
-    <input type="number" step="0.01" name="valor_produto" placeholder="Digite o preço..." required>
+                <h2>Preço</h2>
+                <input type="number" step="0.01" name="valor_produto" placeholder="Digite o preço..." required>
 
-    <button type="submit" class="sessao-login-btn">Cadastrar</button>
+                <button type="submit" class="sessao-login-btn">Cadastrar</button>
 
-    <!-- Links de navegação -->
-    <a href="Cadastrodefornecedores.php" class="listagem-nao">Não cadastrou o fornecedor? Cadastre aqui.</a>
-    <a href="index.php" class="sessao-login-btn-sair">Voltar</a> 
-</form>
-
+                <!-- Links de navegação -->
+                <a href="Cadastrodefornecedores.php" class="listagem-nao">Não cadastrou o fornecedor? Cadastre aqui.</a>
+                <a href="index.php" class="sessao-login-btn-sair">Voltar</a> 
+            </div>
         </section>
     </form>
   </div>
