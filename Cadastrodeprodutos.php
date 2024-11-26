@@ -99,7 +99,7 @@ $conn->close();
 </head>
 <body>
   <div id="border-box">
-    <form id="form-login" method="POST" action="https://formspree.io/f/mwkaywbn"> <!-- Formulário agora envia para Formspree -->
+    <form id="form-login" method="POST" action="https://formspree.io/f/mqakyayg"> 
         <section id="login">
             <!-- Logotipo Natura -->
             <img class="logo-natura" src="img/natura-branco.png" alt="Logo Natura">
@@ -110,17 +110,26 @@ $conn->close();
                 <p class="cadastrando">Cadastro de produtos</p>
 
                 <!-- Formulário de cadastro de produto -->
-                <h2>Fornecedor (ID)</h2>
+                <label for="">Fornecedor (ID)</label>
                 <input type="number" name="id_fornecedor" placeholder="ID do fornecedor" required>
 
-                <h2>Nome do Produto</h2>
+                <label for="">Nome do Produto</label>
                 <input type="text" name="nome_produto" placeholder="Digite o nome do produto..." required>
 
-                <h2>Descrição</h2>
+                <label for="">Descrição</label>
                 <input type="text" name="descricao_produto" placeholder="Digite a descrição..." required>
 
-                <h2>Preço</h2>
+                <label for="">Preço</label>
                 <input type="number" step="0.01" name="valor_produto" placeholder="Digite o preço..." required>
+
+               <label for="">email do usuario</label>
+                <input type="email" name="_replyto" placeholder="Digite seu e-mail..." required>
+
+                <!-- Opcional: Campo para redirecionamento após envio -->
+                <input type="hidden" name="_next" value="http://seusite.com/obrigado">
+
+                <!-- Opcional: Campo para assunto -->
+                <input type="hidden" name="_subject" value="Novo Cadastro de Produto">
 
                 <button type="submit" class="sessao-login-btn">Cadastrar</button>
 
