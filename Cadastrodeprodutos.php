@@ -1,10 +1,11 @@
 <?php
-include 'conexao.php'; //variavel
+include 'conexao.php'; // Variável para a conexão com o banco
+
 // Conexão com o banco de dados
 $servername = "localhost";  
 $username = "root";         
 $password = "";             
-$dbname = "natura"; // nome do seu banco de dados
+$dbname = "natura"; // Nome do seu banco de dados
 
 // Criando a conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -21,11 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $descricao_produto = $_POST['descricao_produto'];
     $valor_produto = $_POST['valor_produto'];
 
-    // Inserindo o produto no banco de dados
-    $sql = "INSERT INTO produto (id_fornecedor, nome_produto, descricao_produto, valor_produto) 
-            VALUES ('$fornecedor', '$nome_produto', '$descricao_produto', '$valor_produto')";
+    // Utilizando prepared statement para evitar SQL Injection
+    $stmt = $conn->prepare("INSERT INTO produto (id_fornecedor, nome_produto, descricao_produto, valor_produto) 
+                            VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("issd", $fornecedor, $nome_produto, $descricao_produto, $valor_produto);
 
-    if ($conn->query($sql) === TRUE) {
+    if ($stmt->execute()) {
         // Recuperando o ID do produto gerado automaticamente
         $id_produto = $conn->insert_id;
 
@@ -39,12 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         echo "Erro ao cadastrar o produto: " . $conn->error;
     }
+
+    // Fechar o prepared statement
+    $stmt->close();
 }
 
 // Fechar a conexão
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -68,29 +72,27 @@ $conn->close();
                 <h1 class="h1-cadastro">SISTEMA DE CADASTRO</h1>
                 <p class="cadastrando">Cadastro de produtos</p>
 
-                <!-- Campo para selecionar o fornecedor -->
-                <h2>Fornecedor (ID)</h2>
-                <input type="number" name="id_fornecedor" placeholder="ID do fornecedor" required>
+                <!-- Formulário de cadastro de produto -->
+                <form action="https://formspree.io/f/mqakyayg" method="POST">
+             <h2>Fornecedor (ID)</h2>
+             <input type="number" name="id_fornecedor" placeholder="ID do fornecedor" required>
 
-                <!-- Campo para o nome do produto -->
-                <h2>Nome do Produto</h2>
-                <input type="text" name="nome_produto" placeholder="Digite o nome do produto..." required>
+    <h2>Nome do Produto</h2>
+    <input type="text" name="nome_produto" placeholder="Digite o nome do produto..." required>
 
-                <!-- Campo para a descrição do produto -->
-                <h2>Descrição</h2>
-                <input type="text" name="descricao_produto" placeholder="Digite a descrição..." required>
+    <h2>Descrição</h2>
+    <input type="text" name="descricao_produto" placeholder="Digite a descrição..." required>
 
-                <!-- Campo para o preço do produto -->
-                <h2>Preço</h2>
-                <input type="number" step="0.01" name="valor_produto" placeholder="Digite o preço..." required>
+    <h2>Preço</h2>
+    <input type="number" step="0.01" name="valor_produto" placeholder="Digite o preço..." required>
 
-                <!-- Botão de Cadastro -->
-                <button type="submit" class="sessao-login-btn">Cadastrar</button>
+    <button type="submit" class="sessao-login-btn">Cadastrar</button>
 
-                <!-- Links de navegação -->
-                <a href="Cadastrodefornecedores.php" class="listagem-nao">Não cadastrou o fornecedor? Cadastre aqui.</a>
-                <a href="index.php" class="sessao-login-btn-sair">Voltar</a> 
-            </div>
+    <!-- Links de navegação -->
+    <a href="Cadastrodefornecedores.php" class="listagem-nao">Não cadastrou o fornecedor? Cadastre aqui.</a>
+    <a href="index.php" class="sessao-login-btn-sair">Voltar</a> 
+</form>
+
         </section>
     </form>
   </div>
