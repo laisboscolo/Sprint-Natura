@@ -165,34 +165,61 @@ if (isset($_GET['edit_id'])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="shortcut icon" href="img/natura-108.png">
-    <title>Natura</title>
+    <title>Gestão de Fornecedores</title>
 </head>
 <body>
   <div id="border-box">
-    <form id="form-login" method="POST">
-        <section id="login">
-            <!-- Logotipo Natura -->
+    <form method="POST" enctype="multipart/form-data">
+        <section id="form-fornecedor">
             <img class="logo-natura" src="img/natura-branco.png" alt="Logo Natura">
-            <br><br>
+            <h2>Cadastro de Fornecedor</h2>
+            <input type="hidden" name="id" value="<?php echo isset($fornecedor['id']) ? $fornecedor['id'] : ''; ?>">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome" value="<?php echo isset($fornecedor['nome']) ? $fornecedor['nome'] : ''; ?>" required>
 
-            <div id="container">
-                <h2>Usuário</h2>
-                <input type="text" name="usuario" placeholder="E-mail ou Número" required>
-                
-                <h2>Senha</h2>
-                <input type="password" name="senha" placeholder="Digite sua senha" required>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="<?php echo isset($fornecedor['email']) ? $fornecedor['email'] : ''; ?>" required>
 
-                <!-- Botão de envio -->
-                <button type="submit" class="sessao-login-btn">Entrar</button>
+            <label for="telefone">Telefone:</label>
+            <input type="text" name="telefone" id="telefone" value="<?php echo isset($fornecedor['telefone']) ? $fornecedor['telefone'] : ''; ?>" required>
 
-                <!-- Exibir erro, se existir -->
-                <?php if (!empty($error)): ?>
-                    <p style="color: red;"><?php echo $error; ?></p>
-                <?php endif; ?>
+            <label for="imagem">Imagem:</label>
+            <input type="file" name="imagem" id="imagem">
 
-            </div>
+            <button type="submit">Salvar Fornecedor</button>
+
+            <?php if (isset($mensagem)) { echo "<p>$mensagem</p>"; } ?>
         </section>
     </form>
+
+    <section id="fornecedores">
+        <h2>Lista de Fornecedores</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $fornecedores->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['nome']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
+                        <td><?php echo $row['telefone']; ?></td>
+                        <td>
+                            <a href="?edit_id=<?php echo $row['id']; ?>">Editar</a> |
+                            <a href="?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </section>
   </div>
 </body>
 </html>
