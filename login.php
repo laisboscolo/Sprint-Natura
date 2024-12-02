@@ -2,6 +2,8 @@
 session_start();
 include('conexao.php'); // Inclui a conexão com o banco de dados
 
+$error = ''; // Inicializa a variável de erro como vazia
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $usuario = $_POST['usuario'];
@@ -22,13 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('Location: index.php');
             exit();
         } else {
-            $error = "Usuário ou senha inválidos.";
+            $error = "Usuário ou senha inválidos."; // Define o erro caso a consulta não retorne resultados
         }
 
         $stmt->close();
     } else {
         // Caso não consiga preparar a consulta
-        $error = "Erro ao preparar a consulta.";
+        $error = "Erro ao preparar a consulta."; // Define o erro em caso de falha na preparação
     }
 }
 ?>
