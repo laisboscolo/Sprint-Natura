@@ -165,29 +165,24 @@ if (isset($_GET['edit_id'])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="shortcut icon" href="img/natura-108.png">
-    <title>Gestão de Fornecedores</title>
+    <title>Cadastro de Fornecedores</title>
 </head>
 <body>
   <div id="border-box">
-    <form method="POST" enctype="multipart/form-data">
-        <section id="form-fornecedor">
-            <img class="logo-natura" src="img/natura-branco.png" alt="Logo Natura">
-            <h2>Cadastro de Fornecedor</h2>
-            <input type="hidden" name="id" value="<?php echo isset($fornecedor['id']) ? $fornecedor['id'] : ''; ?>">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" value="<?php echo isset($fornecedor['nome']) ? $fornecedor['nome'] : ''; ?>" required>
-
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" value="<?php echo isset($fornecedor['email']) ? $fornecedor['email'] : ''; ?>" required>
-
-            <label for="telefone">Telefone:</label>
-            <input type="text" name="telefone" id="telefone" value="<?php echo isset($fornecedor['telefone']) ? $fornecedor['telefone'] : ''; ?>" required>
-
-            <label for="imagem">Imagem:</label>
-            <input type="file" name="imagem" id="imagem">
-
-            <button type="submit">Salvar Fornecedor</button>
-
+ <!-- Formulário de Fornecedor -->
+    <h2>Cadastrar Fornecedor</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="fornecedor_id" value="<?= $fornecedor_id ?? ''; ?>">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" value="<?= $nome ?? ''; ?>" required><br>
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" value="<?= $email ?? ''; ?>" required><br>
+        <label for="telefone">Telefone:</label>
+        <input type="text" name="telefone" value="<?= $telefone ?? ''; ?>" required><br>
+        <label for="imagem">Imagem:</label>
+        <input type="file" name="imagem"><br>
+        <button type="submit">Salvar Fornecedor</button>
+</form>
             <?php if (isset($mensagem)) { echo "<p>$mensagem</p>"; } ?>
         </section>
     </form>
