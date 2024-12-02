@@ -207,21 +207,3 @@ tr:hover {
 .listagem-nao:hover {
     color: #D05858;
 }
-
-/* Parágrafos e cabeçalhos */
-.p-cadastro {
-    font-size: 20px;
-    color: #D22424;
-    background-color: #EEC872;
-}
-
-.h1-cadastro {
-    font-size: 30px;
-}
-
-.tabela-listagem {
-    margin: 0 auto;
-    text-align: center;
-    width: 90%;
-    max-width: 800px;
-}

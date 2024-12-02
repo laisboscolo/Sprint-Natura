@@ -1,5 +1,7 @@
 <?php
+// Inclui o arquivo que valida a sessão do usuário
 include('valida_sessao.php');
+// Inclui o arquivo de conexão com o banco de dados
 include('conexao.php');
 
 // Função para redimensionar e salvar a imagem
@@ -152,6 +154,7 @@ if (isset($_GET['edit_id'])) {
 $fornecedores = $conn->query("SELECT id, nome FROM fornecedores");
 ?>
 
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -165,7 +168,7 @@ $fornecedores = $conn->query("SELECT id, nome FROM fornecedores");
 <body>
     <div class="container">
         <!-- Cadastro de Fornecedor -->
-        <h2>Cadastro de Fornecedor</h2>
+        <h2>Cadastro de produtos</h2>
         <form method="post">
             <input type="hidden" name="cadastro_fornecedor" value="1">
             <label>Nome:</label>
