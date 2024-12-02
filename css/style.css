@@ -1,3 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    font-size: 100%;
+    font: normal;
+}
+
+ol, ul{
+    list-style: none;
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
 @import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
 
 /* Definindo variáveis de cores */
@@ -12,11 +29,10 @@
     --btn-hover-color: #218838;
 }
 
-/* Estilo do corpo da página */
 body {
     font-family: "Cabin", sans-serif;
     color: #FFF;
-    background-color: var(--primary-color);
+    background-color: #E16A13; /* defina a cor explícita */
     margin: 0;
     padding: 0;
 }
@@ -27,14 +43,15 @@ body {
     flex-direction: column; /* Coloca os elementos em coluna */
     justify-content: center; /* Centraliza verticalmente */
     align-items: center; /* Centraliza horizontalmente */
-    background-color: var(--secondary-color); /* Cor de fundo da caixinha */
-    padding: 20px; /* Espaçamento interno */
-    border-radius: 8px; /* Bordas arredondadas */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    width: 90%; /* Ajusta a largura para ser responsiva */
-    max-width: 800px; /* Define uma largura máxima */
-    margin: auto; /* Centraliza horizontalmente */
-}
+    background-color: #F2A900; /* defina a cor explícita */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto; /* ajuste a hierarquia de seletores */
+  }
+
 
 /* Estilo dos botões */
 .destaqueTexto input {
@@ -258,4 +275,32 @@ form input[type="submit"] {
 
 form input[type="submit"]:hover {
     background-color: var(--secondary-color);
+}
+
+div.formulario {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.formulario label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+div.formulario input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--text-color);
 }

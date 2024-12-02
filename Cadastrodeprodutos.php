@@ -188,7 +188,7 @@ $class = isset($class) ? $class : '';
 
     <!-- Formulário de Produto -->
     <h2>Cadastrar Produto</h2>
-    <form action="" method="post" enctype="multipart/form-data">
+    <><form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= isset($produto_id) ? htmlspecialchars($produto_id) : ''; ?>">
 
         <label for="fornecedor_id_produto">Fornecedor:</label>
@@ -216,7 +216,7 @@ $class = isset($class) ? $class : '';
         <input type="file" name="imagem_produto"><br>
 
         <button type="submit">Salvar Produto</button>
-    </form>
+    </form></div>
 
     <!-- Tabela de Fornecedores -->
     <h2>Fornecedores Cadastrados</h2>

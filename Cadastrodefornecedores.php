@@ -171,7 +171,8 @@ if (isset($_GET['edit_id'])) {
   <div id="border-box">
  <!-- Formulário de Fornecedor -->
     <h2>Cadastrar Fornecedor</h2>
-    <form action="" method="post" enctype="multipart/form-data">
+    
+    <div id="container"><form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="fornecedor_id" value="<?= $fornecedor_id ?? ''; ?>">
         <label for="nome">Nome:</label>
         <input type="text" name="nome" value="<?= $nome ?? ''; ?>" required><br>
@@ -185,7 +186,7 @@ if (isset($_GET['edit_id'])) {
 </form>
             <?php if (isset($mensagem)) { echo "<p>$mensagem</p>"; } ?>
         </section>
-    </form>
+    </form><
 
     <section id="fornecedores">
         <h2>Lista de Fornecedores</h2>
