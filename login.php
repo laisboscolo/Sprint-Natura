@@ -1,31 +1,37 @@
-<?php
+<?php 
 session_start();
-include('conexao.php'); 
+include('conexao.php'); // Inclui a conexão com o banco de dados
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $usuario = $_POST['usuario'];
-    $senha = md5($_POST['senha']);
+    $senha = md5($_POST['senha']);  // Mantendo md5
 
     // Protegendo contra SQL Injection usando Prepared Statements
     $sql = "SELECT * FROM usuarios WHERE usuario = ? AND senha = ?";
+    // Preparando a consulta
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $usuario, $senha);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $_SESSION['usuario'] = $usuario;
-        header('Location: index.php');
-        exit();
+    if ($stmt) {  // Verifica se a preparação foi bem-sucedida
+        $stmt->bind_param("ss", $usuario, $senha);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $_SESSION['usuario'] = $usuario;
+            header('Location: index.php');
+            exit();
+        } else {
+            $error = "Usuário ou senha inválidos.";
+        }
+
+        $stmt->close();
     } else {
-        $error = "Usuário ou senha inválidos.";
+        // Caso não consiga preparar a consulta
+        $error = "Erro ao preparar a consulta.";
     }
-
-    $stmt->close();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">

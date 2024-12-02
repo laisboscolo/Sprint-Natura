@@ -1,7 +1,7 @@
-<?php include('valida_sessao.php'); ?> <!-- Inclui o arquivo que verifica se o usuário tem uma sessão válida. -->
-<?php include('conexao.php'); ?> <!-- Inclui o arquivo que faz a conexão com o banco de dados. -->
+<?php 
+include('valida_sessao.php');  // Inclui o arquivo que verifica se o usuário tem uma sessão válida.
+include('conexao.php');         // Inclui o arquivo que faz a conexão com o banco de dados.
 
-<?php
 // Verifica se foi passado um ID para exclusão via GET
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id']; // Recebe o ID do produto que será excluído
@@ -13,8 +13,11 @@ if (isset($_GET['delete_id'])) {
     }
 }
 
-// Realiza uma consulta no banco de dados para listar todos os produtos e seus respectivos fornecedores
-$produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f.nome AS fornecedor_nome FROM produtos p JOIN fornecedores f ON p.fornecedor_id = f.id");
+// Consulta os fornecedores
+$result_fornecedor = $conn->query("SELECT id AS id_fornecedor, nome AS nome_fornecedor, email AS email_fornecedor, telefone AS telefone_fornecedor FROM fornecedores");
+
+// Consulta os produtos
+$result_produto = $conn->query("SELECT p.id AS id_produto, p.nome AS nome_produto, p.descricao AS descricao_produto, p.preco AS valor_produto, f.nome AS nome_fornecedor FROM produtos p JOIN fornecedores f ON p.fornecedor_id = f.id");
 ?>
 
 <!DOCTYPE html>
