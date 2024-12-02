@@ -5,238 +5,140 @@ body {
     font-family: "Cabin", sans-serif;
     color: #FFF;
     background-color: #E16A13;
+    margin: 0;
 }
 
 /* "Caixa" onde os elementos ficam organizados */
 #container {
     display: flex;
-    flex-direction: column; /* Coloca os elementos em coluna */
-    justify-content: center; /* Centraliza verticalmente */
-    align-items: center; /* Centraliza horizontalmente */
-    background-color: #F2A900; /* Cor de fundo da caixinha */
-    padding: 20px; /* Espaçamento interno */
-    border-radius: 8px; /* Bordas arredondadas */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    width: 90%; /* Ajusta a largura para ser responsiva */
-    max-width: 800px; /* Define uma largura máxima */
-    margin: auto; /* Centraliza horizontalmente */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2A900;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
 }
 
-/* Fonte importada */
+/* Fonte personalizada */
 .katibeh-regular {
     font-family: "Katibeh", serif;
 }
 
 /* Estilo dos botões */
 .destaqueTexto input {
-    background-color: #e30613;
+    background-color: #E30613;
+    color: #FFF;
     padding: 5px 15px;
-    color: #fff;
+    border: none;
     border-radius: 10px;
     font-weight: bold;
-    width: 80%; /* A largura agora é responsiva */
-    max-width: 100px; /* Largura máxima */
+    width: 80%;
+    max-width: 100px;
     height: 30px;
-    margin: 5px auto; /* Centraliza os botões */
-    border: 0;
+    margin: 5px auto;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .destaqueTexto input:hover {
-    background-color: black;
+    background-color: #000;
 }
 
+/* Estilo da logo */
 #logo-inicial {
-    width: 100%; /* Largura responsiva */
-    max-width: 300px; /* Define uma largura máxima */
-    height: auto; /* Mantém a proporção */
+    width: 100%;
+    max-width: 300px;
+    height: auto;
 }
 
-/* Estilos para a barra lateral (sidebar) */
+/* Barra lateral */
 #login {
     display: flex;
-    flex-direction: column; /* Alinha os elementos em coluna */
-    justify-content: center; /* Centraliza verticalmente */
-    align-items: center; /* Centraliza horizontalmente */
-    height: 100vh; /* Altura total da viewport */
-    margin: 0; /* Remove margens padrão */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
+/* Formulário de login */
 #form-login {
-    width: 90%; /* Ajusta a largura */
-    max-width: 600px; /* Largura máxima do formulário */
-    margin: 0 auto; /* Centraliza o formulário na página */
-    text-align: center; /* Centraliza o texto dentro do formulário */
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
 }
 
-/* Estilos para inputs */
+/* Estilo dos campos de input */
 input[type=email],
 input[type=password],
 input[type=tel],
 #form-login input[type=text] {
-    display: block; /* Mostra os campos como blocos */
-    border-bottom: 3px solid #F2A900; /* Borda inferior */
-    padding: 10px; /* Espaçamento interno */
-    margin: 0 auto 20px; /* Centraliza com margem inferior */
-    width: 80%; /* Largura do campo */
-    max-width: 300px; /* Largura máxima */
-    font-size: 16px; /* Tamanho da fonte */
-    font-family: 'Open sans', sans-serif; /* Fonte utilizada */
-    color: #DE884A; /* Cor do texto */
+    display: block;
+    border-bottom: 3px solid #F2A900;
+    padding: 10px;
+    margin: 0 auto 20px;
+    width: 80%;
+    max-width: 300px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    color: #DE884A;
 }
 
-.logo-natura {
-    display: block; /* Faz a imagem ser tratada como bloco */
-    margin: 0 auto; /* Centraliza a imagem */
-    width: 80%; /* Ajuste a largura conforme necessário */
-    max-width: 300px; /* Define uma largura máxima */
-    height: auto; /* Mantém a proporção da imagem */
-}
-
-/* Estilos para botões */
+/* Botões gerais */
 .sessao-login-btn,
-form input[type=submit] {
-    background-color: #DE884A; /* Fundo dos botões */
-    color: #FFF; /* Texto branco */
-    padding: 10px; /* Espaçamento interno */
-    transition: background-color 0.5s; /* Transição suave ao interagir */
-    width: 80%; /* Largura responsiva */
-    max-width: 100px; /* Largura máxima */
-    text-align: center; /* Centraliza o texto */
-    font-size: 100%; /* Tamanho de fonte padrão */
-    font-weight: bold; /* Negrito */
-    border: none; /* Remove bordas */
-    border-radius: 5%; /* Bordas arredondadas */
-    cursor: pointer; /* Muda o cursor para indicar clicável */
-    margin: 10px auto; /* Centraliza os botões com espaçamento */
-}
-
+form input[type=submit],
 .sessao-login-btn-sair {
-    background-color: #DE884A; /* Fundo amarelo */
-    color: #FFF; /* Texto branco */
-    padding: 10px; /* Espaçamento interno */
-    transition: .5s; /* Transição suave ao interagir */
-    width: 80%; /* Largura responsiva */
-    max-width: 50px; /* Largura máxima */
-    text-align: center; /* Centraliza o texto */
-    font-size: 60%; /* Tamanho de fonte padrão */
-    font-weight: bold; /* Negrito */
-    border: none; /* Remove bordas */
-    border-radius: 5%; /* Bordas arredondadas */
-    cursor: pointer; /* Muda o cursor para indicar clicável */
-    margin: 10px auto; /* Centraliza os botões com espaçamento */
+    background-color: #DE884A;
+    color: #FFF;
+    padding: 10px;
+    width: 80%;
+    max-width: 100px;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px auto;
+    transition: background-color 0.3s;
 }
 
-/* Estilo para o efeito hover nos botões */
+/* Hover dos botões */
 .sessao-login-btn:hover,
-form input[type=submit]:hover {
-    background-color: #E16A13; /* Muda a cor de fundo ao passar o mouse */
+form input[type=submit]:hover,
+.sessao-login-btn-sair:hover {
+    background-color: #E16A13;
 }
 
-/* Ajustes de responsividade com media queries */
+/* Responsividade */
 @media (max-width: 768px) {
     #container {
-        padding: 10px; /* Ajusta o padding */
+        padding: 10px;
     }
-    
+
     .destaqueTexto input,
     .sessao-login-btn,
     form input[type=submit],
     .sessao-login-btn-sair {
-        width: 90%; /* Aumenta a largura dos botões em telas menores */
-        max-width: none; /* Remove a largura máxima */
+        width: 90%;
+        max-width: none;
     }
-    
-    .item {
-        width: 80%; /* Largura maior para itens em telas menores */
-        max-width: none; /* Remove a largura máxima */
-    }
-    
+
     #logo-inicial {
-        width: 100%; /* Largura completa em dispositivos menores */
-        max-width: 200px; /* Limita a largura máxima */
+        max-width: 200px;
     }
 }
 
-.container-cadastro {
-    background-color: #F2A900; /* Cor de fundo da caixinha */
-    width: 90%; /* Ajusta a largura para ser responsiva */
-    max-width: 800px; /* Largura máxima */
-    display: flex; /* Exibe os itens em linha */
-    flex-direction: row; /* Mantém os itens em linha */
-    justify-content: center;
-    align-items: center; /* Centraliza verticalmente */
-    margin: 10px auto; /* Adiciona margem vertical e centraliza */
-    border-radius: 30px;
-    position: relative; /* Permite o uso de posicionamento */
-}
-
-/* Estilo dos itens do cadastro */
-.item {
-    width: 150px; /* Largura menor dos botões */
-    height: 70px; /* Altura menor dos botões */
-    margin: 15px; /* Espaçamento entre os itens */
-    background-color: #DE884A; /* Cor do botão */
-    color: white; /* Cor do texto */
-    font-size: 20px; /* Tamanho da fonte */
-    display: flex; /* Permite o alinhamento interno */
-    justify-content: center; /* Centraliza o conteúdo horizontalmente */
-    align-items: center; /* Centraliza o conteúdo verticalmente */
-    text-decoration: none; /* Remove sublinhado */
-    border: none; /* Remove borda */
-    cursor: pointer; /* Muda o cursor para indicar que é clicável */
-    transition: background-color 0.5s; 
-    border-radius: 20px; /* Bordas arredondadas */
-}
-
-.item:hover {
-    background-color: #EEC872; /* Muda a cor ao passar o mouse */
-}
-
-.sessao-login-btn-sair {
-    display: inline-block; /* Para que o link se comporte como um botão */
-    background-color: #DE884A; /* Cor do botão */
-    color: white; /* Cor do texto */
-    padding: 10px; /* Espaçamento interno */
-    text-decoration: none; /* Remove sublinhado */
-    border-radius: 80px; /* Bordas arredondadas */
-    transition: background-color 0.5s; 
-}
-
-.sessao-login-btn-sair:hover {
-    background-color: #EEC872; /* Muda a cor ao passar o mouse */
-}
-
-.listagem {
-    text-decoration: none; /* Remove sublinhado */
-    color: #FFF;
-}
-
-.listagem-nao {
-    text-decoration: none; /* Remove sublinhado */
-    color: #D22424;
-    transition: background-color 0.5s; 
-}
-
-.listagem-nao:hover {
-    color: #D05858; /* Muda a cor ao passar o mouse */
-}
-
-.cadastrando {
-    font-size: 18px;
-    color: #fff;
-    text-shadow: #D22424;
-}
-
-.h1-cadastro {
-    font-size: 30px;
-}
-
+/* Estilo da tabela */
 table {
     width: 100%;
     border-collapse: separate;
     margin-top: 20px;
-    background-color: #f3b938;
+    background-color: #F3B938;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -248,27 +150,78 @@ th, td {
 
 th {
     background-color: #D22424;
-    color: white;
+    color: #FFF;
 }
 
 tr:hover {
     background-color: #EEC872;
 }
 
-.actions {
+/* Caixa de cadastro */
+.container-cadastro {
+    background-color: #F2A900;
+    width: 90%;
+    max-width: 800px;
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    border-radius: 30px;
+    position: relative;
 }
 
+/* Estilo dos itens de cadastro */
+.item {
+    width: 150px;
+    height: 70px;
+    margin: 15px;
+    background-color: #DE884A;
+    color: #FFF;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+}
+
+.item:hover {
+    background-color: #EEC872;
+}
+
+/* Estilo de links */
+.listagem {
+    text-decoration: none;
+    color: #FFF;
+}
+
+.listagem-nao {
+    text-decoration: none;
+    color: #D22424;
+    transition: color 0.3s;
+}
+
+.listagem-nao:hover {
+    color: #D05858;
+}
+
+/* Parágrafos e cabeçalhos */
 .p-cadastro {
     font-size: 20px;
     color: #D22424;
     background-color: #EEC872;
 }
 
+.h1-cadastro {
+    font-size: 30px;
+}
+
 .tabela-listagem {
-    margin: 0 auto; /* Centraliza a tabela na página */
-    text-align: center; /* Centraliza o texto dentro das células */
-    width: 90%; /* Ajusta a largura da tabela */
-    max-width: 800px; /* Largura máxima */
+    margin: 0 auto;
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
 }

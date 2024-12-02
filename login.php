@@ -1,17 +1,31 @@
 <?php
-include 'conexao.php'; //variavel
-    // Verificar se o formulário foi enviado
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
+session_start();
+include('conexao.php'); 
 
-        if ($email == 'email_usuario' && $senha == 'senha_usuario') {
-            $mensagem = "Login bem-sucedido!";
-        } else {
-            $mensagem = "E-mail ou senha inválidos!";
-        }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $usuario = $_POST['usuario'];
+    $senha = md5($_POST['senha']);
+
+    // Protegendo contra SQL Injection usando Prepared Statements
+    $sql = "SELECT * FROM usuarios WHERE usuario = ? AND senha = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $usuario, $senha);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $_SESSION['usuario'] = $usuario;
+        header('Location: index.php');
+        exit();
+    } else {
+        $error = "Usuário ou senha inválidos.";
     }
+
+    $stmt->close();
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,7 +39,7 @@ include 'conexao.php'; //variavel
 </head>
 <body>
   <div id="border-box">
-    <form id="form-login" method="POST"> <!-- Alterei para POST para enviar os dados -->
+    <form id="form-login" method="POST">
         <section id="login">
             <!-- Logotipo Natura -->
             <img class="logo-natura" src="img/natura-branco.png" alt="Logo Natura">
@@ -33,24 +47,20 @@ include 'conexao.php'; //variavel
 
             <div id="container">
                 <h2>Usuário</h2>
-                <input type="email" name="email" placeholder="E-mail ou Número" required>
+                <input type="text" name="usuario" placeholder="E-mail ou Número" required>
                 
                 <h2>Senha</h2>
                 <input type="password" name="senha" placeholder="Digite sua senha" required>
-                
-                <a href="index.php" class="sessao-login-btn">Entrar</a>
 
-                </form>
-                
-                <a href="https://support.microsoft.com/pt-br/account-billing/redefinir-uma-senha-esquecida-de-conta-microsoft-eff4f067-5042-c1a3-fe72-b04d60556c37">Esqueceu a senha?</a>
+                <!-- Botão de envio -->
+                <button type="submit" class="sessao-login-btn">Entrar</button>
+
+                <!-- Exibir erro, se existir -->
+                <?php if (!empty($error)): ?>
+                    <p style="color: red;"><?php echo $error; ?></p>
+                <?php endif; ?>
+
             </div>
-
-            <?php
-            // Exibir mensagem se o login falhar ou for bem-sucedido
-            if (isset($mensagem)) {
-                echo "<div class='mensagem'>$mensagem</div>";
-            }
-            ?>
         </section>
     </form>
   </div>

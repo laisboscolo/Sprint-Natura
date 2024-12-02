@@ -1,89 +1,160 @@
 <?php
-// Conexão com o banco de dados
-include 'conexao.php'; // Inclua o arquivo de conexão
+// Inclui o arquivo que valida a sessão do usuário
+include('valida_sessao.php');
+// Inclui o arquivo de conexão
+include('conexao.php');
 
-// Criando a conexão
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "natura"; // Nome do seu banco de dados
+// Função para redimensionar e salvar imagem
+function redimensionarESalvarImagem($arquivo, $largura = 80, $altura = 80) {
+    $diretorio_destino = "img/";
+    $nome_arquivo = uniqid() . '_' . basename($arquivo["name"]);
+    $caminho_completo = $diretorio_destino . $nome_arquivo;
+    $tipo_arquivo = strtolower(pathinfo($caminho_completo, PATHINFO_EXTENSION));
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificando se houve erro na conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
-
-// Verificando se o formulário foi submetido
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Pegando os dados do formulário e validando
-    $nome_fornecedor = mysqli_real_escape_string($conn, $_POST['nome_fornecedor']);
-    $email_fornecedor = mysqli_real_escape_string($conn, $_POST['email_fornecedor']);
-    $telefone_fornecedor = mysqli_real_escape_string($conn, $_POST['telefone_fornecedor']);
-
-    // Inserindo os dados na tabela fornecedor usando prepared statement
-    $sql = "INSERT INTO fornecedor (nome_fornecedor, email_fornecedor, telefone_fornecedor) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $nome_fornecedor, $email_fornecedor, $telefone_fornecedor);
-
-    if ($stmt->execute()) {
-        echo "<h2>Fornecedor cadastrado com sucesso!</h2>";
-        
-        // Exibindo os registros após o cadastro
-        echo "<h3>Fornecedores Cadastrados:</h3>";
-        $sql = "SELECT * FROM fornecedor";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            echo "<table border='1'>";
-            echo "<tr><th>ID</th><th>Nome</th><th>Email</th><th>Telefone</th><th>Ações</th></tr>";
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <td>" . $row['id_fornecedor'] . "</td>
-                        <td>" . $row['nome_fornecedor'] . "</td>
-                        <td>" . $row['email_fornecedor'] . "</td>
-                        <td>" . $row['telefone_fornecedor'] . "</td>
-                        <td>
-                            <a href=''>Editar</a> |
-                            <a href=''>Excluir</a>
-                        </td>
-                      </tr>";
-            }
-            echo "</table>";
-        } else {
-            echo "<p>Nenhum fornecedor cadastrado!</p>";
-        }
-        
-    } else {
-        echo "Erro ao cadastrar fornecedor: " . $stmt->error;
+    // Verifica se é uma imagem válida
+    $check = getimagesize($arquivo["tmp_name"]);
+    if ($check === false) {
+        return "O arquivo não é uma imagem válida.";
     }
 
+    // Verifica o tamanho do arquivo
+    if ($arquivo["size"] > 5000000) {
+        return "O arquivo é muito grande. O tamanho máximo permitido é 5MB.";
+    }
+
+    // Permite alguns formatos de arquivos
+    if ($tipo_arquivo != "jpg" && $tipo_arquivo != "jpeg" && $tipo_arquivo != "png" && $tipo_arquivo != "gif") {
+        return "Apenas arquivos JPG, JPEG, PNG e GIF são permitidos.";
+    }
+
+    // Cria uma nova imagem a partir do arquivo enviado
+    if ($tipo_arquivo == "jpg" || $tipo_arquivo == "jpeg") {
+        $imagem_original = imagecreatefromjpeg($arquivo["tmp_name"]);
+    } elseif ($tipo_arquivo == "png") {
+        $imagem_original = imagecreatefrompng($arquivo["tmp_name"]);
+    } elseif ($tipo_arquivo == "gif") {
+        $imagem_original = imagecreatefromgif($arquivo["tmp_name"]);
+    }
+
+    // Obtém as dimensões originais da imagem
+    $largura_original = imagesx($imagem_original);
+    $altura_original = imagesy($imagem_original);
+
+    // Calcula as novas dimensões mantendo a proporção
+    $ratio = min($largura / $largura_original, $altura / $altura_original);
+    $nova_largura = $largura_original * $ratio;
+    $nova_altura = $altura_original * $ratio;
+
+    // Cria uma nova imagem com as dimensões calculadas
+    $nova_imagem = imagecreatetruecolor($nova_largura, $nova_altura);
+
+    // Redimensiona a imagem original para a nova imagem
+    imagecopyresampled($nova_imagem, $imagem_original, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+
+    // Salva a nova imagem
+    if ($tipo_arquivo == "jpg" || $tipo_arquivo == "jpeg") {
+        imagejpeg($nova_imagem, $caminho_completo, 90);
+    } elseif ($tipo_arquivo == "png") {
+        imagepng($nova_imagem, $caminho_completo);
+    } elseif ($tipo_arquivo == "gif") {
+        imagegif($nova_imagem, $caminho_completo);
+    }
+
+    // Libera a memória
+    imagedestroy($imagem_original);
+    imagedestroy($nova_imagem);
+
+    return $caminho_completo;
+}
+
+// Verifica se o formulário foi enviado
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = isset($_POST['id']) ? (int)$_POST['id'] : null; // Protege o ID contra SQL Injection
+    $nome = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8'); // Protege contra XSS
+    $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'); // Protege contra XSS
+    $telefone = htmlspecialchars($_POST['telefone'], ENT_QUOTES, 'UTF-8'); // Protege contra XSS
+
+    // Processa o upload da imagem
+    $imagem = "";
+    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
+        $resultado_upload = redimensionarESalvarImagem($_FILES['imagem']);
+        if (strpos($resultado_upload, 'img/') === 0) {
+            $imagem = $resultado_upload;
+        } else {
+            $mensagem_erro = $resultado_upload;
+        }
+    }
+
+    // Prepara a query SQL para inserção ou atualização
+    if ($id) {
+        // Se o ID existe, é uma atualização
+        $sql = "UPDATE fornecedores SET nome = ?, email = ?, telefone = ?";
+        if ($imagem) {
+            $sql .= ", imagem = ?";
+        }
+        $stmt = $conn->prepare($sql);
+        if ($imagem) {
+            $stmt->bind_param("ssss", $nome, $email, $telefone, $imagem);
+        } else {
+            $stmt->bind_param("sss", $nome, $email, $telefone);
+        }
+    } else {
+        // Se não há ID, é uma nova inserção
+        $sql = "INSERT INTO fornecedores (nome, email, telefone, imagem) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssss", $nome, $email, $telefone, $imagem);
+    }
+
+    // Executa a query e verifica se houve erro
+    if ($stmt->execute()) {
+        $mensagem = "Fornecedor cadastrado/atualizado com sucesso!";
+    } else {
+        $mensagem = "Erro: " . $stmt->error;
+    }
     $stmt->close();
 }
 
-// Exclusão de fornecedor
-if (isset($_GET['delete']) && !empty($_GET['delete'])) {
-    $id_fornecedor = $_GET['delete'];
-    
-    // Proteção contra SQL Injection
-    $id_fornecedor = (int)$id_fornecedor;  // Certificando que é um número inteiro
-    
-    // Preparando a consulta de exclusão
-    $sql_delete = "DELETE FROM fornecedor WHERE id_fornecedor = ?";
-    $stmt_delete = $conn->prepare($sql_delete);
-    $stmt_delete->bind_param("i", $id_fornecedor);
+// Verifica se foi solicitada a exclusão de um fornecedor
+if (isset($_GET['delete_id'])) {
+    $delete_id = (int)$_GET['delete_id']; // Protege o ID contra SQL Injection
 
-    if ($stmt_delete->execute()) {
-        echo "<p>Fornecedor excluído com sucesso.</p>";
+    // Verifica se o fornecedor tem produtos cadastrados
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM produtos WHERE fornecedor_id = ?");
+    $stmt->bind_param("i", $delete_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $check_produtos = $result->fetch_assoc();
+    $stmt->close();
+
+    if ($check_produtos['count'] > 0) {
+        $mensagem = "Não é possível excluir este fornecedor pois existem produtos cadastrados para ele.";
     } else {
-        echo "<p>Erro ao excluir fornecedor.</p>";
+        $sql = "DELETE FROM fornecedores WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $delete_id);
+        if ($stmt->execute()) {
+            $mensagem = "Fornecedor excluído com sucesso!";
+        } else {
+            $mensagem = "Erro ao excluir fornecedor: " . $stmt->error;
+        }
+        $stmt->close();
     }
-
-    $stmt_delete->close();
 }
 
-// Fechar a conexão
-$conn->close();
+// Busca todos os fornecedores para listar na tabela
+$fornecedores = $conn->query("SELECT * FROM fornecedores");
+
+// Se foi solicitada a edição de um fornecedor, busca os dados dele
+$fornecedor = null;
+if (isset($_GET['edit_id'])) {
+    $edit_id = (int)$_GET['edit_id']; // Protege o ID contra SQL Injection
+    $stmt = $conn->prepare("SELECT * FROM fornecedores WHERE id = ?");
+    $stmt->bind_param("i", $edit_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $fornecedor = $result->fetch_assoc();
+    $stmt->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -96,33 +167,32 @@ $conn->close();
     <link rel="shortcut icon" href="img/natura-108.png">
     <title>Natura</title>
 </head>
-<body>   
-    <div id="border-box">
-        <form id="form-login" method="POST">
-            <section id="login">
-                <img class="logo-natura" src="img/natura-branco.png" alt="Logo Natura">
-                <br><br>
+<body>
+  <div id="border-box">
+    <form id="form-login" method="POST">
+        <section id="login">
+            <!-- Logotipo Natura -->
+            <img class="logo-natura" src="img/natura-branco.png" alt="Logo Natura">
+            <br><br>
+
+            <div id="container">
+                <h2>Usuário</h2>
+                <input type="text" name="usuario" placeholder="E-mail ou Número" required>
                 
-                <div id="container">
-                    <h1 class="h1-cadastro">SISTEMA DE CADASTRO</h1>
-                    <p class="cadastrando">Cadastro de fornecedores</p>
+                <h2>Senha</h2>
+                <input type="password" name="senha" placeholder="Digite sua senha" required>
 
-                    <h2>Nome</h2>
-                    <input type="text" name="nome_fornecedor" placeholder="Digite aqui..." required>
+                <!-- Botão de envio -->
+                <button type="submit" class="sessao-login-btn">Entrar</button>
 
-                    <h2>Email</h2>
-                    <input type="email" name="email_fornecedor" placeholder="Digite aqui..." required>
+                <!-- Exibir erro, se existir -->
+                <?php if (!empty($error)): ?>
+                    <p style="color: red;"><?php echo $error; ?></p>
+                <?php endif; ?>
 
-                    <h2>Telefone</h2>
-                    <input type="tel" name="telefone_fornecedor" placeholder="Digite aqui..." required>
-
-                    <button type="submit" class="sessao-login-btn">Cadastrar</button>
-
-                    <a href="cadastrodeprodutos.php" class="listagem-nao">Não cadastrou o(s) produto(s)? Cadastre aqui.</a>
-                    <a href="index.php" class="sessao-login-btn-sair">Voltar</a>
-                </div>
-            </section>
-        </form>
-    </div>
+            </div>
+        </section>
+    </form>
+  </div>
 </body>
 </html>

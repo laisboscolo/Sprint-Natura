@@ -1,30 +1,20 @@
+<?php include('valida_sessao.php'); ?> <!-- Inclui o arquivo que verifica se o usuário tem uma sessão válida. -->
+<?php include('conexao.php'); ?> <!-- Inclui o arquivo que faz a conexão com o banco de dados. -->
+
 <?php
-
-include 'conexao.php'; //variavel
-// Conexão com o banco de dados (ajuste os dados conforme o seu banco)
-$servername = "localhost";  // ou seu servidor de banco de dados
-$username = "root";         // seu nome de usuário do MySQL
-$password = "";             // sua senha do MySQL
-$dbname = "natura"; // nome do seu banco de dados
-
-// Criando a conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificando se houve erro na conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
+// Verifica se foi passado um ID para exclusão via GET
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id']; // Recebe o ID do produto que será excluído
+    $sql = "DELETE FROM produtos WHERE id = '$delete_id'"; // Cria a query SQL para deletar o produto com o ID fornecido
+    if ($conn->query($sql) === TRUE) { // Executa a query
+        $mensagem = "Produto excluído com sucesso!"; // Se a exclusão for bem-sucedida, define a mensagem de sucesso
+    } else {
+        $mensagem = "Erro ao excluir produto: " . $conn->error; // Caso ocorra um erro, define a mensagem de erro com a descrição do erro
+    }
 }
 
-// Buscando os fornecedores e produtos cadastrados
-$sql_fornecedor = "SELECT id_fornecedor, nome_fornecedor, email_fornecedor, telefone_fornecedor FROM fornecedor";
-$sql_produto = "SELECT p.id_produto, p.nome_produto, p.descricao_produto, p.valor_produto, f.nome_fornecedor 
-                 FROM produto p 
-                 LEFT JOIN fornecedor f ON p.id_fornecedor = f.id_fornecedor"; // Corrigido o nome da tabela de "fornecedores" para "fornecedor"
-
-// Executando as consultas
-$result_fornecedor = $conn->query($sql_fornecedor);
-$result_produto = $conn->query($sql_produto);
-
+// Realiza uma consulta no banco de dados para listar todos os produtos e seus respectivos fornecedores
+$produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f.nome AS fornecedor_nome FROM produtos p JOIN fornecedores f ON p.fornecedor_id = f.id");
 ?>
 
 <!DOCTYPE html>
