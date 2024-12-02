@@ -7,10 +7,10 @@ Esse trabalho pretende por meio de códigos e programação, desenvolver um webs
 
 
 Ajustes e melhorias
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
- Tarefa 1: inclusão da linguagem de programação JavaScript
- Tarefa 2: Pequenos erros de digitação, cores, etc.
+O projeto foi finalizado e não necessita de mais ajustes, pois todas as etapas foram concluídas com sucesso.
+
+ 
 
  🤝 Time SCRUM
 Aqui está a equipe que desenvolveu este projeto:
