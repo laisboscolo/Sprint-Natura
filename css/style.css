@@ -1,348 +1,173 @@
 @import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
 
-/* Resetando os estilos padrão do navegador */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 /* Estilo do corpo da página */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #F4F4F4;
-    color: #333;
-}
-
-/* Caixa principal onde os elementos ficam organizados */
-#border-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Formulário de fornecedor */
-#form-fornecedor {
-    background-color: #FFF;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-}
-
-#form-fornecedor img {
-    max-width: 200px;
-    margin-bottom: 20px;
-}
-
-h2 {
-    font-size: 24px;
-    color: #2E2E2E;
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #444;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid #FF6F00; /* Destaque no campo de input */
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="file"]:focus {
-    border-color: #E30613; /* Destaque quando em foco */
-}
-
-button {
-    background-color: #1A73E8;
+    font-family: "Cabin", sans-serif;
     color: #FFF;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0F5AC3;
-}
-
-/* Mensagens de sucesso ou erro */
-p {
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #D32F2F;
-}
-
-/* Estilo da lista de fornecedores */
-#fornecedores {
-    margin-top: 50px;
-    width: 100%;
-    overflow-x: auto;
-}
-
-#fornecedores table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #FFF;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-#fornecedores th,
-#fornecedores td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #DDD;
-}
-
-#fornecedores th {
-    background-color: #1976D2;
-    color: #FFF;
-}
-
-#fornecedores tr:nth-child(even) {
-    background-color: #F5F5F5;
-}
-
-#fornecedores tr:hover {
-    background-color: #FFEB3B; /* Cor de destaque quando hover */
-}
-
-#fornecedores a {
-    color: #1A73E8;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#fornecedores a:hover {
-    text-decoration: underline;
-}
-
-/* Estilo para os botões de editar e excluir */
-#fornecedores td a {
-    margin-right: 10px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: #FF6F00;
-    color: #FFF;
-    transition: background-color 0.3s ease;
-}
-
-#fornecedores td a:hover {
-    background-color: #E30613;
-}
-
-/* Estilo responsivo */
-@media (max-width: 768px) {
-    #form-fornecedor {
-        padding: 20px;
-    }
-
-    #fornecedores table {
-        font-size: 14px;
-    }
-
-    #fornecedores th,
-    #fornecedores td {
-        padding: 8px;
-    }
-
-    button {
-        width: 100%;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="file"] {
-        width: 100%;
-        padding: 10px;
-    }
+    background-color: #E16A13;
 }
 
 /* "Caixa" onde os elementos ficam organizados */
 #container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #F2A900;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 800px;
-    margin: 20px auto;
-}
-
-/* Fonte personalizada */
-.katibeh-regular {
-    font-family: "Katibeh", serif;
+    flex-direction: column; /* Coloca os elementos em coluna */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    background-color: #F2A900; /* Cor de fundo da caixinha */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    width: 90%; /* Ajusta a largura para ser responsiva */
+    max-width: 800px; /* Define uma largura máxima */
+    margin: auto; /* Centraliza horizontalmente */
 }
 
 /* Estilo dos botões */
 .destaqueTexto input {
-    background-color: #E30613;
-    color: #FFF;
+    background-color: #e30613;
     padding: 5px 15px;
-    border: none;
+    color: #fff;
     border-radius: 10px;
     font-weight: bold;
-    width: 80%;
-    max-width: 100px;
+    width: 80%; /* A largura agora é responsiva */
+    max-width: 100px; /* Largura máxima */
     height: 30px;
-    margin: 5px auto;
+    margin: 5px auto; /* Centraliza os botões */
+    border: 0;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .destaqueTexto input:hover {
-    background-color: #000;
+    background-color: black;
 }
 
-/* Estilo da logo */
 #logo-inicial {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
+    width: 100%; /* Largura responsiva */
+    max-width: 300px; /* Define uma largura máxima */
+    height: auto; /* Mantém a proporção */
 }
 
-/* Barra lateral */
-#login {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-/* Formulário de login */
+/* Estilos para o formulário */
 #form-login {
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
+    display: flex;
+    flex-direction: column; /* Coloca os campos em coluna */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    width: 90%; /* Ajusta a largura */
+    max-width: 600px; /* Largura máxima do formulário */
+    margin: 0 auto; /* Centraliza o formulário na página */
+    text-align: center; /* Centraliza o texto dentro do formulário */
 }
 
-/* Estilo dos campos de input */
+/* Estilos para inputs */
 input[type=email],
 input[type=password],
 input[type=tel],
 #form-login input[type=text] {
-    display: block;
-    border-bottom: 3px solid #F2A900;
-    padding: 10px;
-    margin: 0 auto 20px;
-    width: 80%;
-    max-width: 300px;
-    font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
-    color: #DE884A;
+    display: block; /* Exibe os campos como blocos */
+    border-bottom: 3px solid #F2A900; /* Borda inferior */
+    padding: 10px; /* Espaçamento interno */
+    margin: 0 auto 20px; /* Centraliza com margem inferior */
+    width: 80%; /* Largura do campo */
+    max-width: 300px; /* Largura máxima */
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: 'Open sans', sans-serif; /* Fonte utilizada */
+    color: #DE884A; /* Cor do texto */
 }
 
-/* Botões gerais */
+/* Estilos para botões */
 .sessao-login-btn,
-form input[type=submit],
-.sessao-login-btn-sair {
-    background-color: #DE884A;
-    color: #FFF;
-    padding: 10px;
-    width: 80%;
-    max-width: 100px;
-    text-align: center;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px auto;
-    transition: background-color 0.3s ease;
+form input[type=submit] {
+    background-color: #DE884A; /* Fundo dos botões */
+    color: #FFF; /* Texto branco */
+    padding: 10px; /* Espaçamento interno */
+    transition: background-color 0.5s; /* Transição suave ao interagir */
+    width: 80%; /* Largura responsiva */
+    max-width: 100px; /* Largura máxima */
+    text-align: center; /* Centraliza o texto */
+    font-size: 100%; /* Tamanho de fonte padrão */
+    font-weight: bold; /* Negrito */
+    border: none; /* Remove bordas */
+    border-radius: 5%; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor para indicar clicável */
+    margin: 10px auto; /* Centraliza os botões com espaçamento */
 }
 
-/* Hover dos botões */
 .sessao-login-btn:hover,
-form input[type=submit]:hover,
+form input[type=submit]:hover {
+    background-color: #E16A13; /* Muda a cor de fundo ao passar o mouse */
+}
+
+/* Estilos para o efeito hover nos botões */
+.sessao-login-btn-sair {
+    background-color: #DE884A; /* Fundo amarelo */
+    color: #FFF; /* Texto branco */
+    padding: 10px; /* Espaçamento interno */
+    transition: .5s; /* Transição suave ao interagir */
+    width: 80%; /* Largura responsiva */
+    max-width: 50px; /* Largura máxima */
+    text-align: center; /* Centraliza o texto */
+    font-size: 60%; /* Tamanho de fonte padrão */
+    font-weight: bold; /* Negrito */
+    border: none; /* Remove bordas */
+    border-radius: 5%; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor para indicar clicável */
+    margin: 10px auto; /* Centraliza os botões com espaçamento */
+}
+
 .sessao-login-btn-sair:hover {
-    background-color: #E16A13;
+    background-color: #EEC872; /* Muda a cor ao passar o mouse */
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    #container {
-        padding: 10px;
-    }
-
-    .destaqueTexto input,
-    .sessao-login-btn,
-    form input[type=submit],
-    .sessao-login-btn-sair {
-        width: 90%;
-        max-width: none;
-    }
-
-    #logo-inicial {
-        max-width: 200px;
-    }
+/* Estilo para os campos de entrada */
+form input, form select, form textarea {
+    width: 100%; /* Largura completa */
+    padding: 10px; /* Espaçamento interno */
+    margin-bottom: 15px; /* Margem inferior */
+    border: 1px solid #DE884A; /* Cor suave para as bordas */
+    border-radius: 4px; /* Bordas arredondadas */
 }
 
-/* Estilo da tabela */
+/* Estilo dos botões de envio */
+button {
+    background-color: #E16A13; /* Cor de fundo do botão */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #F2A900; /* Cor para o hover do botão */
+}
+
+/* Estilo das tabelas */
 table {
     width: 100%;
-    border-collapse: separate;
     margin-top: 20px;
-    background-color: #F3B938;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid black;
-}
-
-th {
-    background-color: #D22424;
-    color: #FFF;
-}
-
-tr:hover {
-    background-color: #EEC872;
-}
-
-/* Caixa de cadastro */
-.container-cadastro {
-    background-color: #F2A900;
-    width: 90%;
-    max-width: 800px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
+table th, table td {
     padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-.container-cadastro h2 {
-    color: #FFF;
-    font-size: 24px;
+/* Estilo das células do cabeçalho da tabela */
+table th {
+    background-color: #E16A13; /* Cor do cabeçalho da tabela */
+    color: white;
+}
+
+/* Estilo dos links nas tabelas */
+table a {
+    color: #DE884A; /* Cor suave para links */
+    text-decoration: none;
+}
+
+table a:hover {
+    text-decoration: underline;
+    color: #F2A900; /* Cor para o hover dos links */
 }
