@@ -24,49 +24,56 @@ $produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f
 </head>
 <body>
     <!-- Barra de navegação superior -->
-    <header><nav class="navbar">
+    <header>
+    <nav class="navbar">
         <img class="logotipo" src="img/natura-branco.png" alt="logotipo">
         <span class="navbar-brand">Bem-vindo, <?php echo $_SESSION['usuario']; ?>!</span>
         <a href="logout.php" class="btn-sair">Sair</a>
-    </nav></header>
+    </nav>
+</header>
 
-    <div class="container">
-        <h2 class="listagem">Listagem de Produtos</h2>
-        <?php if (isset($mensagem)) echo "<p class='message " . ($conn->error ? "error" : "success") . "'>$mensagem</p>"; ?>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Preço</th>
-                <th>Fornecedor</th>
-                <th>Imagem</th>
-                <th>Ações</th>
-            </tr>
-            <?php while ($row = $produtos->fetch_assoc()): ?>
-            <tr>
-                <td><?php echo $row['id']; ?></td>
-                <td><?php echo $row['nome']; ?></td>
-                <td><?php echo $row['descricao']; ?></td>
-                <td><?php echo $row['preco']; ?></td>
-                <td><?php echo $row['fornecedor_nome']; ?></td>
-                <td>
-                    <?php if ($row['imagem']): ?>
-                        <img src="<?php echo $row['imagem']; ?>" alt="Imagem do produto" style="max-width: 100px;">
-                    <?php else: ?>
-                        Sem imagem
-                    <?php endif; ?>
-                </td>
-                <td>
-                    <a href="cadastro_produto.php?edit_id=<?php echo $row['id']; ?>">Editar</a>
-                    <a href="?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
-                </td>
-            </tr>
-            <?php endwhile; ?>
-        </table>
-    </div>
-    <div class="btn-actions" style="margin-top: 20px;">
-        <a href="index.php" class="sessao-login-btn">Voltar</a>
-    </div>
+<!-- Adicionando margem para espaçamento vertical -->
+<div class="container" style="margin-top: 40px;"> <!-- Ajuste de margem superior -->
+    <h2 class="listagem-cadastro">LISTA DE PRODUTOS</h2>
+
+    <?php if (isset($mensagem)) echo "<p class='message " . ($conn->error ? "error" : "success") . "'>$mensagem</p>"; ?>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Fornecedor</th>
+            <th>Imagem</th>
+            <th>Ações</th>
+        </tr>
+        <?php while ($row = $produtos->fetch_assoc()): ?>
+        <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo $row['nome']; ?></td>
+            <td><?php echo $row['descricao']; ?></td>
+            <td><?php echo $row['preco']; ?></td>
+            <td><?php echo $row['fornecedor_nome']; ?></td>
+            <td>
+                <?php if ($row['imagem']): ?>
+                    <img src="<?php echo $row['imagem']; ?>" alt="Imagem do produto" style="max-width: 100px;">
+                <?php else: ?>
+                    Sem imagem
+                <?php endif; ?>
+            </td>
+            <td>
+                <a href="cadastro_produto.php?edit_id=<?php echo $row['id']; ?>" class="editar-btn">Editar</a>
+                <a href="?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?')" class="excluir-btn">Excluir</a>
+            </td>
+        </tr>
+        <?php endwhile; ?>
+    </table>
+</div>
+
+<!-- Adicionando margem superior para o botão "Voltar" -->
+<div class="btn-actions" style="margin-top: 20px;">
+    <a href="index.php" class="sessao-login-btn">Voltar</a>
+</div>
+
 </body>
 </html>

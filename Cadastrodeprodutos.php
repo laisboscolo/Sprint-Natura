@@ -242,7 +242,7 @@ $class = isset($class) ? $class : '';
         </div>
 
         <div id="container-listagem-for">
-            <h2>Listagem de Produtos</h2>
+            <h2 class="listagem-cadastro">Listagem de Produtos</h2>
             <!-- Tabela para listar os produtos cadastrados -->
             <table>
                 <thead>

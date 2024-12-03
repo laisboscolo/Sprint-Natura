@@ -91,7 +91,7 @@ body {
 }
 
 .destaqueTexto input {
-    background-color: #e30613;
+    background-color: #ffe9eb;
     padding: 5px 15px;
     color: #fff;
     border-radius: 10px;
@@ -149,7 +149,7 @@ header {
     padding: 10px 0;
 }
 
-.btn-sair, .btn-itens {
+.btn-sair{
     padding: 5px 10px;
     border-radius: 4px;
     text-decoration: none;
@@ -159,21 +159,39 @@ header {
     cursor: pointer;
 }
 
+.btn-itens {
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 1px solid #E16A13; /* Remove a borda branca e mantém apenas a borda laranja */
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #f2a900; /* Cor de fundo mais forte */
+    color: white;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Adiciona transição suave */
+}
+
+.btn-itens:hover {
+    background-color: #E16A13; /* Cor de fundo laranja mais forte ao passar o mouse */
+    color: #fff; /* Cor do texto laranja */
+    border-color: #E16A13; /* Mantém a borda laranja ao passar o mouse */
+}
+
+
+
 .btn-sair {
     background-color: rgba(255, 128, 0, 0.52);
     color: white;
     border: #000203;
+    font-size: 12px;
 }
 .btn-sair:hover {
-    background-color: rgba(255, 182, 110, 0.689);
-    color: #E16A13;
+    background-color: #E16A13;
+    color: #fff;
 }
 
-.btn-itens {
-    background-color: #f2a9008d;
-    border: 1px #E16A13 solid;
-    color: white;
-}
+
 
 .logotipo {
     width: 5%;
@@ -205,7 +223,7 @@ header {
 }
 
 .login-texto {
-    color: #DE884A;
+    color: #F2A900;
 }
 
 /* Estilo para os campos de entrada (email, senha, telefone e texto) */
@@ -388,13 +406,7 @@ table a:hover {
     color: var(--secondary-color);
 }
 
-table td a:last-child {
-    background-color: #e74c3c;
-}
 
-table td a:last-child:hover {
-    background-color: #c0392b;
-}
 
 div.success, div.error {
     padding: 10px;
@@ -452,20 +464,53 @@ div.formulario input, select, textarea {
     color: var(--text-color);
 }
 
-.link {
-    display: inline-block;
-    background-color: #3498db;
-    color: white;
-    padding: 20px;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 5px;
-}
-
-.link:hover {
-    background-color: #2980b9;
-}
 
 .btn-actions{
     text-align: center;
+}
+
+.excluir-btn{
+
+    color: #721c24; /* Cor do texto */
+    background-color: transparent; 
+    text-decoration: none; /* Remove o sublinhado */
+    display: inline-block; 
+    text-align: center; /* Alinha o texto no centro */
+    cursor: pointer; /* Muda o cursor para pointer ao passar o mouse */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transições suaves */
+}
+
+.excluir-btn:hover {
+    background-color: transparent; /* Cor de fundo mais escura no hover */
+    color: #fff; /* Garante que o texto permaneça branco no hover */
+}
+
+.editar-btn{
+
+    color: #721c24; /* Cor do texto */
+    background-color: transparent; 
+    text-decoration: none; /* Remove o sublinhado */
+    display: inline-block; 
+    text-align: center; /* Alinha o texto no centro */
+    cursor: pointer; /* Muda o cursor para pointer ao passar o mouse */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transições suaves */
+}
+
+.editar-btn:hover {
+    background-color: transparent; /* Cor de fundo mais escura no hover */
+    color: #fff; /* Garante que o texto permaneça branco no hover */
+}
+
+h2.listagem-cadastro {
+    color: #E16A13; /* Cor do texto */
+    background-color: rgba(255, 255, 255, 0.498); /* Cor de fundo mais suave (transparente) */
+    border: 0.5px solid #E16A13; /* Borda laranja */
+    border-radius: 8px; /* Bordas arredondadas */
+    font-size: 32px; /* Tamanho da fonte maior */
+    font-weight: bold; /* Fonte em negrito */
+    padding: 10px 20px; /* Espaçamento interno */
+    margin-bottom: 20px; /* Margem inferior maior */
+    text-align: center; /* Alinha o texto no centro */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para destaque */
+    transition: background-color 0.3s, color 0.3s; /* Transição suave para efeitos interativos */
 }

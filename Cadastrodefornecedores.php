@@ -147,7 +147,7 @@ if (isset($_GET['edit_id'])) {
                             </div>
 
         
-    <div id="container-listagem-for"><h2>Listagem de Fornecedores</h2>
+    <div id="container-listagem-for"><h2 class="listagem-cadastro">Listagem de Fornecedores</h2>
         <!-- Tabela para listar os fornecedores cadastrados -->
         <table>
             <tr>
