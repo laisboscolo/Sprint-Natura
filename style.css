@@ -1,0 +1,428 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: normal 100% sans-serif;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
+
+/* Variáveis de cores */
+:root {
+    --primary-color: #E16A13;
+    --secondary-color: #F2A900;
+    --success-color: #d4edda;
+    --error-color: #f8d7da;
+    --hover-color: #2980b9;
+    --text-color: #555;
+    --link-color: #000203;
+    --btn-hover-color: #218838;
+}
+
+body {
+    font-family: "Cabin", sans-serif;
+    color: #E16A13;
+    background: url('img/natura-fundo2.png') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+
+
+.container-login{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.52);
+        padding: 70px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 4);
+        width: 400px;
+        max-width: 800px;
+        position: fixed;
+        top: 50%;              /* Posiciona o container a 50% da altura da tela */
+        left: 50%;             /* Posiciona o container a 50% da largura da tela */
+        transform: translate(-50%, -50%); /* Ajusta o container para que seu centro fique no ponto especificado */
+        margin: 0;             /* Remove a margem para evitar deslocamento adicional */
+    }
+    
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.52);
+    padding: 70px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 4);
+    width: 400px;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+#container-listagem-for{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    padding: 80px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: auto;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.destaqueTexto input {
+    background-color: #e30613;
+    padding: 5px 15px;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: bold;
+    width: 80%;
+    max-width: 100px;
+    height: 30px;
+    margin: 5px auto;
+    border: 0;
+    cursor: pointer;
+}
+
+.destaqueTexto input:hover {
+    background-color: black;
+}
+
+.logo-natura {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#form-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.navbar {
+    background-color: #E16A13;
+    color: white;
+    padding: 10px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 1.2em;
+}
+
+.btn-sair, .btn-itens {
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 1px solid white;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-sair {
+    background-color: rgba(255, 128, 0, 0.52);
+    color: white;
+    border: #000203;
+}
+.btn-sair:hover {
+    background-color: rgba(255, 182, 110, 0.689);
+    color: #E16A13;
+}
+
+.btn-itens {
+    background-color: #f2a9008d;
+    border: 1px #E16A13 solid;
+    color: white;
+}
+
+.logotipo {
+    width: 5%;
+    height: auto;
+}
+
+
+.container-cadastro {
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between; /* Distribui os itens igualmente */
+    align-items: center; /* Alinha os itens verticalmente */
+    gap: 20px; /* Espaçamento entre os itens */
+    font-family: "Cabin", sans-serif;
+    font-size: 15px;
+    color: #555;
+    width: 100%; /* Ocupa toda a largura disponível */
+    max-width: 800px; /* Limita a largura máxima */
+    box-sizing: border-box;
+    position:  relative;
+}
+
+.container-cadastro > * {
+    flex: 1; /* Faz com que todos os elementos dentro do contêiner tenham o mesmo tamanho de largura */
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.login-texto {
+    color: #DE884A;
+}
+
+input[type=email],
+input[type=password],
+input[type=tel],
+#form-login input[type=text] {
+    display: block;
+    border-bottom: 3px solid var(--secondary-color);
+    padding: 10px;
+    margin: 0 auto 20px;
+    width: 80%;
+    max-width: 300px;
+    font-size: 16px;
+    font-family: 'Open sans', sans-serif;
+    color: #DE884A;
+}
+
+/* Formulário */
+form .input-container {
+    display: flex;                /* Usando Flexbox */
+    flex-direction: column;       /* Organiza os itens em uma coluna */
+    justify-content: center;      /* Alinha os itens ao centro verticalmente */
+    align-items: center;          /* Alinha os itens ao centro horizontalmente */
+    width: 300px;                 /* Largura fixa do formulário */
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="file"],
+form input[type="password"],
+textarea,
+button[type="submit"] {
+    width: 100%;                  /* Faz todos os elementos ocuparem a largura total do contêiner */
+    padding: 10px;                /* Adiciona espaçamento interno */
+    border: 1px solid #ccc;      /* Borda padrão */
+    box-sizing: border-box;      /* Inclui a borda no cálculo do tamanho */
+    text-align: center;           /* Alinha o texto ao centro */
+    line-height: 20px;            /* Altura de linha */
+    border-bottom: 2px solid #E16A13; /* Borda inferior destacada */
+    margin-bottom: 20px;          /* Espaçamento entre os campos */
+}
+
+/* Ajuste de textarea para maior controle de altura */
+textarea {
+    height: 120px;                /* Altura definida para o campo de descrição */
+}
+
+/* Estilo para o botão */
+button[type="submit"] {
+    background-color: #E16A13;    /* Cor de fundo do botão */
+    color: white;                 /* Cor do texto no botão */
+    cursor: pointer;              /* Cursor de clique */
+    margin-top: 10px;              /* Espaçamento superior entre o botão e os inputs */
+    padding: 12px;                /* Maior espaçamento interno no botão */
+    font-size: 16px;              /* Aumenta o tamanho da fonte */
+    text-transform: uppercase;    /* Torna o texto em maiúsculas */
+    border: none;                 /* Remove a borda do botão */
+}
+
+button[type="submit"]:hover {
+    background-color: #D05A10;    /* Cor do botão quando o mouse passa por cima */
+}
+
+/* Estilo para os campos quando estão em foco */
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="file"]:focus,
+form input[type="password"]:focus,
+textarea:focus {
+    border-color: #E16A13;        /* Cor da borda quando o campo é focado */
+    outline: none;                /* Remove a borda de foco padrão */
+}
+
+
+.sessao-login-btn, form input[type=submit] {
+    background-color: #DE884A;
+    color: #FFF;
+    padding: 10px;
+    width: 80%;
+    max-width: 100px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+    margin: 10px auto;
+    transition: background-color 0.5s;
+}
+
+.sessao-login-btn:hover, form input[type=submit]:hover {
+    background-color: var(--primary-color);
+}
+
+.sessao-login-btn-sair {
+    background-color: #DE884A;
+    color: #FFF;
+    padding: 10px 20px;
+    width: 100px;
+    max-width: 50px;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+    margin: 10px auto;
+    transition: .5s;
+}
+
+.sessao-login-btn-sair:hover {
+    background-color: #EEC872;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #DE884A;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.52);
+}
+
+table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+table a {
+    color: #DE884A;
+    text-decoration: none;
+}
+
+table a:hover {
+    text-decoration: underline;
+    color: var(--secondary-color);
+}
+
+table td a:last-child {
+    background-color: #e74c3c;
+}
+
+table td a:last-child:hover {
+    background-color: #c0392b;
+}
+
+div.success, div.error {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+div.success {
+    background-color: var(--success-color);
+    color: #155724;
+}
+
+div.error {
+    background-color: var(--error-color);
+    color: #721c24;
+}
+
+h2 {
+    color: var(--link-color);
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+div.formulario {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.formulario input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.link {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 20px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.link:hover {
+    background-color: #2980b9;
+}

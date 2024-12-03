@@ -16,7 +16,7 @@ function redimensionarESalvarImagem($arquivo, $largura = 80, $altura = 80) {
 
     // Verifica se é uma imagem válida
     $check = getimagesize($arquivo["tmp_name"]);
-    if($check === false) {
+    if ($check === false) {
         return "O arquivo não é uma imagem válida.";
     }
 
@@ -26,17 +26,24 @@ function redimensionarESalvarImagem($arquivo, $largura = 80, $altura = 80) {
     }
 
     // Permite apenas alguns formatos de arquivo
-    if($tipo_arquivo != "jpg" && $tipo_arquivo != "png" && $tipo_arquivo != "jpeg" && $tipo_arquivo != "gif" ) {
+    if (!in_array($tipo_arquivo, ['jpg', 'jpeg', 'png', 'gif'])) {
         return "Apenas arquivos JPG, JPEG, PNG e GIF são permitidos.";
     }
 
     // Cria uma nova imagem a partir do arquivo enviado
-    if ($tipo_arquivo == "jpg" || $tipo_arquivo == "jpeg") {
-        $imagem_original = imagecreatefromjpeg($arquivo["tmp_name"]);
-    } elseif ($tipo_arquivo == "png") {
-        $imagem_original = imagecreatefrompng($arquivo["tmp_name"]);
-    } elseif ($tipo_arquivo == "gif") {
-        $imagem_original = imagecreatefromgif($arquivo["tmp_name"]);
+    switch ($tipo_arquivo) {
+        case 'jpg':
+        case 'jpeg':
+            $imagem_original = imagecreatefromjpeg($arquivo["tmp_name"]);
+            break;
+        case 'png':
+            $imagem_original = imagecreatefrompng($arquivo["tmp_name"]);
+            break;
+        case 'gif':
+            $imagem_original = imagecreatefromgif($arquivo["tmp_name"]);
+            break;
+        default:
+            return "Tipo de imagem não suportado.";
     }
 
     // Obtém as dimensões originais da imagem
@@ -55,12 +62,17 @@ function redimensionarESalvarImagem($arquivo, $largura = 80, $altura = 80) {
     imagecopyresampled($nova_imagem, $imagem_original, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
 
     // Salva a nova imagem
-    if ($tipo_arquivo == "jpg" || $tipo_arquivo == "jpeg") {
-        imagejpeg($nova_imagem, $caminho_completo, 90);
-    } elseif ($tipo_arquivo == "png") {
-        imagepng($nova_imagem, $caminho_completo);
-    } elseif ($tipo_arquivo == "gif") {
-        imagegif($nova_imagem, $caminho_completo);
+    switch ($tipo_arquivo) {
+        case 'jpg':
+        case 'jpeg':
+            imagejpeg($nova_imagem, $caminho_completo, 90);
+            break;
+        case 'png':
+            imagepng($nova_imagem, $caminho_completo);
+            break;
+        case 'gif':
+            imagegif($nova_imagem, $caminho_completo);
+            break;
     }
 
     // Libera a memória
@@ -73,35 +85,37 @@ function redimensionarESalvarImagem($arquivo, $largura = 80, $altura = 80) {
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'] ?? '';
-    $fornecedor_id = $_POST['fornecedor_id'];
-    $nome = $_POST['nome'];
-    $descricao = $_POST['descricao'];
-    $preco = str_replace(',', '.', $_POST['preco']); // Converte vírgula para ponto
+    $fornecedor_id = $_POST['fornecedor_id_produto'];
+    $nome = $_POST['nome_produto'];
+    $descricao = $_POST['descricao_produto'];
+    $preco = str_replace(',', '.', $_POST['preco_produto']); // Converte vírgula para ponto
 
     // Processa o upload da imagem
     $imagem = "";
-    if(isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
-        $resultado_upload = redimensionarESalvarImagem($_FILES['imagem']);
-        if(strpos($resultado_upload, 'img/') === 0) {
+    if (isset($_FILES['imagem_produto']) && $_FILES['imagem_produto']['error'] == 0) {
+        $resultado_upload = redimensionarESalvarImagem($_FILES['imagem_produto']);
+        if (strpos($resultado_upload, 'img/') === 0) {
             $imagem = $resultado_upload;
         } else {
             $mensagem_erro = $resultado_upload;
         }
     }
 
-    // Prepara a query SQL para inserção ou atualização
+    // Prepara a query SQL para inser ção ou atualização
     if ($id) {
         // Se o ID existe, é uma atualização
         $sql = "UPDATE produtos SET fornecedor_id=?, nome=?, descricao=?, preco=?";
         $params = [$fornecedor_id, $nome, $descricao, $preco];
-        if($imagem) {
+        if ($imagem) {
             $sql .= ", imagem=?";
             $params[] = $imagem;
         }
         $sql .= " WHERE id=?";
         $params[] = $id;
+
+        // Prepara e executa a query
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param(str_repeat('s', count($params)), ...$params);
+        $stmt->bind_param(str_repeat('s', count($params) - 1) . 'i', ...$params);
         $mensagem = "Produto atualizado com sucesso!";
     } else {
         // Se não há ID, é uma nova inserção
@@ -150,18 +164,9 @@ if (isset($_GET['edit_id'])) {
     $stmt->close();
 }
 
-// Supondo que a função listar_fornecedores já exista
-// Aqui o código de conexão com o banco de dados, substitua com a sua própria configuração
-$fornecedores = $conn->query("SELECT id, nome FROM fornecedores");
-
 // Função para listar fornecedores
 function listar_fornecedores($conn) {
-    return $conn->query("SELECT id, nome, email, telefone FROM fornecedores");
-}
-
-// Função para listar produtos (presumindo que a relação entre fornecedores e produtos seja por fornecedor_id)
-function listar_produtos($conn) {
-    return $conn->query("SELECT p.id, p.nome, f.nome AS fornecedor_nome, p.preco FROM produtos p JOIN fornecedores f ON p.fornecedor_id = f.id");
+    return $conn->query("SELECT id, nome FROM fornecedores");
 }
 
 // Verifica se existe uma mensagem para exibir
@@ -175,11 +180,18 @@ $class = isset($class) ? $class : '';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css"> 
     <link rel="shortcut icon" href="img/natura-108.png">
     <title>Cadastro de Produtos</title>
 </head>
 <body>
+    <!-- Barra de navegação superior -->
+    <nav class="navbar">
+        <img class="logotipo" src="img/natura-branco.png" alt="logotipo">
+        <span class="navbar-brand">Bem-vindo, <?php echo $_SESSION['usuario']; ?>!</span>
+        <a href="logout.php" class="btn-sair">Sair</a>
+    </nav>
+    <div class="container" style="width: 900px;">
     <h1>Cadastro de Produtos</h1>
 
     <?php if (!empty($mensagem)): ?>
@@ -187,91 +199,77 @@ $class = isset($class) ? $class : '';
     <?php endif; ?>
 
     <!-- Formulário de Produto -->
-    <h2>Cadastrar Produto</h2>
-    <><form action="" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?= isset($produto_id) ? htmlspecialchars($produto_id) : ''; ?>">
+    <form action="" method="post" enctype="multipart/form-data" class="form-login">
+    <input type="hidden" name="id" value="<?= isset($produto['id']) ? htmlspecialchars($produto['id']) : ''; ?>">
 
-        <label for="fornecedor_id_produto">Fornecedor:</label>
-        <select name="fornecedor_id_produto" required>
-            <option value="">Selecione o fornecedor</option>
-            <?php 
-            $result_fornecedores = listar_fornecedores($conn);
-            while ($fornecedor = $result_fornecedores->fetch_assoc()): ?>
-                <option value="<?= htmlspecialchars($fornecedor['id']); ?>" <?= isset($fornecedor_id_produto) && $fornecedor_id_produto == $fornecedor['id'] ? 'selected' : ''; ?>>
-                    <?= htmlspecialchars($fornecedor['nome']); ?>
-                </option>
-            <?php endwhile; ?>
-        </select><br>
+    <label for="fornecedor_id_produto">Fornecedor:</label>
+    <select name="fornecedor_id_produto" required>
+        <option value="">Selecione o fornecedor</option>
+        <?php 
+        $result_fornecedores = listar_fornecedores($conn);
+        while ($fornecedor = $result_fornecedores->fetch_assoc()): ?>
+            <option value="<?= htmlspecialchars($fornecedor['id']); ?>" <?= isset($produto['fornecedor_id']) && $produto['fornecedor_id'] == $fornecedor['id'] ? 'selected' : ''; ?>>
+                <?= htmlspecialchars($fornecedor['nome']); ?>
+            </option>
+        <?php endwhile; ?>
+    </select>
 
-        <label for="nome_produto">Nome do Produto:</label>
-        <input type="text" name="nome_produto" value="<?= isset($nome_produto) ? htmlspecialchars($nome_produto) : ''; ?>" required><br>
+    <label for="nome_produto">Nome do Produto:</label>
+    <input type="text" name="nome_produto" value="<?= isset($produto['nome']) ? htmlspecialchars($produto['nome']) : ''; ?>" required>
 
-        <label for="descricao_produto">Descrição:</label>
-        <textarea name="descricao_produto" required><?= isset($descricao_produto) ? htmlspecialchars($descricao_produto) : ''; ?></textarea><br>
+    <label for="descricao_produto">Descrição:</label>
+    <textarea name="descricao_produto" required><?= isset($produto['descricao']) ? htmlspecialchars($produto['descricao']) : ''; ?></textarea>
 
-        <label for="preco_produto">Preço:</label>
-        <input type="text" name="preco_produto" value="<?= isset($preco_produto) ? htmlspecialchars($preco_produto) : ''; ?>" required><br>
+    <label for="preco_produto">Preço:</label>
+    <input type="text" name="preco_produto" value="<?= isset($produto['preco']) ? number_format($produto['preco'], 2, ',', '.') : ''; ?>" required>
 
-        <label for="imagem_produto">Imagem:</label>
-        <input type="file" name="imagem_produto"><br>
+    <label for="imagem_produto">Imagem:</label>
+    <input type="file" name="imagem_produto">
 
-        <button type="submit">Salvar Produto</button>
-    </form></div>
+    <button type="submit">Salvar Produto</button>
+</form>
 
-    <!-- Tabela de Fornecedores -->
-    <h2>Fornecedores Cadastrados</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Telefone</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $result_fornecedores = listar_fornecedores($conn);
-            while ($fornecedor = $result_fornecedores->fetch_assoc()): ?>
+
+<div id="container-listagem-for"><h2>Listagem de Produtos</h2>
+        <!-- Tabela para listar os produtos cadastrados -->
+        <table>
+            <thead>
                 <tr>
-                    <td><?= htmlspecialchars($fornecedor['nome']); ?></td>
-                    <td><?= htmlspecialchars($fornecedor['email']); ?></td>
-                    <td><?= htmlspecialchars($fornecedor['telefone']); ?></td>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Fornecedor</th>
+                    <th>Imagem</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $produtos->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['nome']; ?></td>
+                    <td><?php echo $row['descricao']; ?></td>
+                    <td><?php echo 'R$ ' . number_format($row['preco'], 2, ',', '.'); ?></td>
+                    <td><?php echo $row['fornecedor_nome']; ?></td>
                     <td>
-                        <a href="?edit_fornecedor_id=<?= htmlspecialchars($fornecedor['id']); ?>">Editar</a>
-                        <a href="?delete_fornecedor_id=<?= htmlspecialchars($fornecedor['id']); ?>" onclick="return confirm('Tem certeza que deseja excluir este fornecedor?')">Excluir</a>
+                        <?php if ($row['imagem']): ?>
+                            <img src="<?php echo $row['imagem']; ?>" alt="Imagem do produto" class="thumbnail">
+                        <?php else: ?>
+                            Sem imagem
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <a href="?edit_id=<?php echo $row['id']; ?>">Editar</a>
+                        <a href="?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                     </td>
                 </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+                <?php endwhile; ?>
+            </tbody>
+        </table></div>
+        <div class="actions">
+          <a href="index.php" class="sessao-login-btn">Voltar</a>
+        </div>
 
-    <!-- Tabela de Produtos -->
-    <h2>Produtos Cadastrados</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Produto</th>
-                <th>Fornecedor</th>
-                <th>Preço</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $result_produtos = listar_produtos($conn);
-            while ($produto = $result_produtos->fetch_assoc()): ?>
-                <tr>
-                    <td><?= htmlspecialchars($produto['nome']); ?></td>
-                    <td><?= htmlspecialchars($produto['fornecedor_nome']); ?></td>
-                    <td>R$ <?= number_format($produto['preco'], 2, ',', '.'); ?></td>
-                    <td>
-                        <a href="?edit_produto_id=<?= htmlspecialchars($produto['id']); ?>">Editar</a>
-                        <a href="?delete_produto_id=<?= htmlspecialchars($produto['id']); ?>" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
 </body>
 </html>
