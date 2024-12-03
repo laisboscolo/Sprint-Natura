@@ -28,11 +28,17 @@ table {
 }
 
 body {
+    width: 100%;
+    height: 100%;
     font-family: "Cabin", sans-serif;
     color: #E16A13;
     background: url('img/natura-fundo2.png') no-repeat center center fixed;
     background-size: cover;
     position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 
@@ -133,6 +139,16 @@ body {
     font-size: 1.2em;
 }
 
+header {
+    position: relative; 
+    top: 0; /* Posiciona o cabeçalho no topo */
+    left: 0; /* Alinha o cabeçalho à esquerda */
+    width: 100%; /* Faz o cabeçalho ter a largura total da tela */
+    background-color: #E16A13; 
+    z-index: 1000; /* Garante que o cabeçalho ficará acima de outros conteúdos */
+    padding: 10px 0;
+}
+
 .btn-sair, .btn-itens {
     padding: 5px 10px;
     border-radius: 4px;
@@ -192,10 +208,11 @@ body {
     color: #DE884A;
 }
 
-input[type=email],
-input[type=password],
-input[type=tel],
-#form-login input[type=text] {
+/* Estilo para os campos de entrada (email, senha, telefone e texto) */
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+#form-login input[type="text"] {
     display: block;
     border-bottom: 3px solid var(--secondary-color);
     padding: 10px;
@@ -207,21 +224,31 @@ input[type=tel],
     color: #DE884A;
 }
 
-/* Formulário */
-form .input-container {
+/* Formulário - Containers de entrada */
+form .input-container{
     display: flex;                /* Usando Flexbox */
     flex-direction: column;       /* Organiza os itens em uma coluna */
     justify-content: center;      /* Alinha os itens ao centro verticalmente */
     align-items: center;          /* Alinha os itens ao centro horizontalmente */
     width: 300px;                 /* Largura fixa do formulário */
+    margin: 0 auto;               /* Centraliza o formulário */
+}
+form .input-container2 {
+    display: flex;                /* Usando Flexbox */
+    flex-direction: column;       /* Organiza os itens em uma coluna */
+    justify-content: center;      /* Alinha os itens ao centro verticalmente */
+    align-items: center;          /* Alinha os itens ao centro horizontalmente */
+    width: 100%;                 /* Largura fixa do formulário */
+    margin: 0 auto;               /* Centraliza o formulário */
 }
 
+/* Estilo comum para os campos de entrada, textarea e select */
 form input[type="text"],
 form input[type="email"],
 form input[type="file"],
 form input[type="password"],
 textarea,
-button[type="submit"] {
+select {
     width: 100%;                  /* Faz todos os elementos ocuparem a largura total do contêiner */
     padding: 10px;                /* Adiciona espaçamento interno */
     border: 1px solid #ccc;      /* Borda padrão */
@@ -249,6 +276,7 @@ button[type="submit"] {
     border: none;                 /* Remove a borda do botão */
 }
 
+/* Estilo do botão ao passar o mouse */
 button[type="submit"]:hover {
     background-color: #D05A10;    /* Cor do botão quando o mouse passa por cima */
 }
@@ -263,7 +291,7 @@ textarea:focus {
     outline: none;                /* Remove a borda de foco padrão */
 }
 
-
+/* Estilo para os botões de login */
 .sessao-login-btn, form input[type=submit] {
     background-color: #DE884A;
     color: #FFF;
@@ -280,10 +308,12 @@ textarea:focus {
     transition: background-color 0.5s;
 }
 
+/* Efeito de hover para o botão de login */
 .sessao-login-btn:hover, form input[type=submit]:hover {
     background-color: var(--primary-color);
 }
 
+/* Estilo para o botão de logout */
 .sessao-login-btn-sair {
     background-color: #DE884A;
     color: #FFF;
@@ -299,10 +329,12 @@ textarea:focus {
     transition: .5s;
 }
 
+/* Efeito de hover para o botão de logout */
 .sessao-login-btn-sair:hover {
     background-color: #EEC872;
 }
 
+/* Estilo geral para os campos de formulário */
 form input, form select, form textarea {
     width: 100%;
     padding: 10px;
@@ -313,6 +345,7 @@ form input, form select, form textarea {
     color: var(--text-color);
 }
 
+/* Estilo de botão genérico */
 button {
     background-color: var(--primary-color);
     color: white;
@@ -322,6 +355,7 @@ button {
     cursor: pointer;
 }
 
+/* Efeito de hover para o botão genérico */
 button:hover {
     background-color: var(--secondary-color);
 }
@@ -381,8 +415,13 @@ div.error {
 }
 
 h2 {
-    color: var(--link-color);
+    color: black;
+    font-size: 30px;
     margin-bottom: 15px;
+}
+h2.listagem {
+    color: transparent;
+    margin-bottom: 130px;
 }
 
 form label {
@@ -425,4 +464,8 @@ div.formulario input, select, textarea {
 
 .link:hover {
     background-color: #2980b9;
+}
+
+.btn-actions{
+    text-align: center;
 }

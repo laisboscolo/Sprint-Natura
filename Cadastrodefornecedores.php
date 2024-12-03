@@ -84,16 +84,16 @@ if (isset($_GET['edit_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="img/natura-108.png">
-    <title>Cadastro de Fornecedores</title>
+    <title>Cadastro de fornecedores</title>
 </head>
 <body>
 
     <!-- Barra de navegação superior -->
-    <nav class="navbar">
+    <header><nav class="navbar">
         <img class="logotipo" src="img/natura-branco.png" alt="logotipo">
         <span class="navbar-brand">Bem-vindo, <?php echo $_SESSION['usuario']; ?>!</span>
         <a href="logout.php" class="btn-sair">Sair</a>
-    </nav>
+    </nav></header>
 
     <div id="container">
         <h2>Cadastro de Fornecedor</h2>
@@ -178,7 +178,8 @@ if (isset($_GET['edit_id'])) {
             </tr>
             <?php endwhile; ?>
         </table>
-        <div class="actions">
+                    </div>
+        <div class="btn-actions">
           <a href="index.php" class="sessao-login-btn">Voltar</a>
         </div>
 </body>

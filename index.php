@@ -15,11 +15,11 @@
 <body>   
 
     <!-- Barra de navegação superior -->
-    <nav class="navbar">
+    <header><nav class="navbar">
         <img class="logotipo" src="img/natura-branco.png" alt="logotipo">
         <span class="navbar-brand">Bem-vindo, <?php echo $_SESSION['usuario']; ?>!</span>
         <a href="logout.php" class="btn-sair">Sair</a>
-    </nav>
+    </nav></header>
 
   <section>  <div id="border-box">
         <section id="login">

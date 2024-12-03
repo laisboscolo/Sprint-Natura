@@ -24,14 +24,14 @@ $produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f
 </head>
 <body>
     <!-- Barra de navegação superior -->
-    <nav class="navbar">
+    <header><nav class="navbar">
         <img class="logotipo" src="img/natura-branco.png" alt="logotipo">
         <span class="navbar-brand">Bem-vindo, <?php echo $_SESSION['usuario']; ?>!</span>
         <a href="logout.php" class="btn-sair">Sair</a>
-    </nav>
+    </nav></header>
 
     <div class="container">
-        <h2>Listagem de Produtos</h2>
+        <h2 class="listagem">Listagem de Produtos</h2>
         <?php if (isset($mensagem)) echo "<p class='message " . ($conn->error ? "error" : "success") . "'>$mensagem</p>"; ?>
         <table>
             <tr>
@@ -64,8 +64,9 @@ $produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f
             </tr>
             <?php endwhile; ?>
         </table>
-        <div class="actions">
-          <a href="index.php" class="sessao-login-btn">Voltar</a>
-        </div>
+    </div>
+    <div class="btn-actions" style="margin-top: 20px;">
+        <a href="index.php" class="sessao-login-btn">Voltar</a>
+    </div>
 </body>
 </html>
