@@ -1,6 +1,6 @@
 # Sprint Natura
 
-![image](https://github.com/user-attachments/assets/f5d88972-599e-4e55-8af3-255315803822)
+![image](https://github.com/user-attachments/assets/f23a4f74-0b9c-4575-8df1-0ffcf41d26bc)
 
 
 Esse trabalho pretende por meio de códigos e programação, desenvolver um website adaptado para diferentes interfaces e dispositivos que sirva para cadastro e mantenha dados guardados, assim como solicitado pela empresa “Natura”. 
