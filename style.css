@@ -11,255 +11,7 @@ ol, ul {
 
 table {
     border-collapse: collapse;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap'); /* Importando a fonte Katibeh */
-
-:root {
-    --primary-color: #E16A13;
-    --secondary-color: #F2A900;
-    --success-color: #d4edda;
-    --error-color: #f8d7da;
-    --hover-color: #2980b9;
-    --text-color: #555;
-    --link-color: #000203;
-    --btn-hover-color: #218838;
-}
-
-body {
     width: 100%;
-    height: 100%;
-    font-family: "Katibeh", sans-serif; /* Usando a fonte Katibeh como a principal */
-    color: #E16A13;
-    background: url('img/natura-fundo2.png') no-repeat center center fixed;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.container-login, #container, #container-listagem-for {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.52);
-    padding: 5%;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    width: 90%;
-    max-width: 800px;
-    margin: 20px auto;
-}
-
-.logo-natura {
-    width: 100%;
-    max-width: 150px;
-    height: auto;
-    margin-bottom: 20px;
-}
-
-#form-login {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.destaqueTexto input {
-    background-color: #ffe9eb;
-    padding: 5px 15px;
-    color: #fff;
-    border-radius: 10px;
-    font-weight: bold;
-    width: 80%;
-    max-width: 100px;
-    height: 30px;
-    margin: 5px auto;
-    border: 0;
-    cursor: pointer;
-}
-
-.destaqueTexto input:hover {
-    background-color: black;
-}
-
-/* Responsividade */
-@media (max-width: 1200px) {
-    .navbar {
-        padding: 10px 5%;
-        width: 100%; /* Garantir que a navbar ocupe 100% da largura */
-    }
-
-    #container, .container-login {
-        padding: 5%;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar {
-        padding: 10px 5%;
-        flex-direction: column;
-        align-items: center;
-        width: 100%; /* Garantir que a navbar ocupe 100% da largura */
-    }
-
-    .navbar-brand {
-        font-size: 1.1em;
-    }
-
-    header {
-        padding: 15px 0;
-    }
-
-    .container-login, #container {
-        padding: 10px;
-        width: 100%;
-    }
-
-    .logo-natura {
-        max-width: 120px;
-    }
-
-    .btn-itens {
-        width: 100%;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    .navbar {
-        padding: 10px 0;
-        flex-direction: column;
-        align-items: center;
-        width: 100%; /* Garantir que a navbar ocupe 100% da largura */
-    }
-
-    .navbar-brand {
-        font-size: 1em;
-    }
-
-    header {
-        padding: 10px 0;
-    }
-
-    .container-login, #container {
-        padding: 10px;
-        width: 100%;
-    }
-
-    .logo-natura {
-        max-width: 80px; /* Ajuste o logo para telas menores */
-    }
-
-    .container-cadastro {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px; /* Reduzir o espaço entre os itens */
-    }
-
-    .container-cadastro > * {
-        width: 100%;
-        text-align: center;
-    }
-
-    .container-cadastro input,
-    .container-cadastro textarea {
-        width: 100%;
-    }
-
-    .btn-itens {
-        width: 100%;
-        font-size: 12px;
-    }
-
-    .btn-sair {
-        font-size: 10px; /* Reduz o tamanho do botão */
-    }
-
-    .container-cadastro input,
-    .container-cadastro textarea {
-        font-size: 14px; /* Ajusta o tamanho da fonte */
-    }
-}
-
-.btn-itens {
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-decoration: none;
-    border: 1px solid #E16A13;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: #f2a900;
-    color: white;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-.btn-itens:hover {
-    background-color: #E16A13;
-    color: #fff;
-}
-
-.btn-sair {
-    background-color: rgba(255, 128, 0, 0.52);
-    color: white;
-    border: #000203;
-    font-size: 12px;
-}
-
-.btn-sair:hover {
-    background-color: #E16A13;
-    color: #fff;
-}
-
-.container-cadastro {
-    text-align: center;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    font-family: "Cabin", sans-serif;
-    font-size: 15px;
-    color: #555;
-    width: 100%;
-    max-width: 800px;
-    box-sizing: border-box;
-}
-
-.container-cadastro > * {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-input[type="email"],
-input[type="password"],
-input[type="tel"],
-#form-login input[type="text"] {
-    display: block;
-    border-bottom: 3px solid var(--secondary-color);
-    padding: 10px;
-    margin: 0 auto 20px;
-    width: 80%;
-    max-width: 300px;
-    font-size: 16px;
-    font-family: 'Open sans', sans-serif;
-    color: #DE884A;
-}
-
-table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
 }
 
 table th, table td {
@@ -284,63 +36,119 @@ table a:hover {
     color: var(--secondary-color);
 }
 
-form input[type="text"]:focus,
-form input[type="email"]:focus,
-form input[type="file"]:focus,
-form input[type="password"]:focus,
-textarea:focus {
-    border-color: #E16A13;
-    outline: none;
+/* Fonte */
+@import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap'); /* Importando a fonte Katibeh */
+
+/* Variáveis de cores */
+:root {
+    --primary-color: #E16A13;
+    --secondary-color: #F2A900;
+    --success-color: #d4edda;
+    --error-color: #f8d7da;
+    --hover-color: #2980b9;
+    --text-color: #555;
+    --link-color: #000203;
+    --btn-hover-color: #218838;
 }
 
-form input[type="text"],
-form input[type="email"],
-form input[type="file"],
-form input[type="password"],
-textarea,
-select {
+/* Body e Container */
+body {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #DE884A;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: var(--text-color);
+    height: 100%;
+    font-family: "Katibeh", sans-serif;
+    color: #E16A13;
+    background: url('img/natura-fundo2.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
-button[type="submit"] {
-    background-color: #E16A13;
-    color: white;
-    cursor: pointer;
-    margin-top: 10px;
-    padding: 12px;
-    font-size: 16px;
-    text-transform: uppercase;
-    border: none;
+.container-login, #container, #container-listagem-for, .container-cadastro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.52);
+    padding: 5%;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    box-sizing: border-box;
 }
 
-button[type="submit"]:hover {
-    background-color: #D05A10;
+.logo-natura {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 20px;
 }
 
-.sessao-login-btn, form input[type=submit] {
-    background-color: #DE884A;
-    color: #FFF;
-    padding: 10px;
+/* Formulário */
+#form-login, .container-cadastro > * {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.destaqueTexto input, input[type="email"], input[type="password"], input[type="tel"], #form-login input[type="text"] {
+    background-color: #ffe9eb;
+    padding: 5px 15px;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: bold;
     width: 80%;
     max-width: 100px;
-    text-decoration: none;
-    text-align: center;
-    font-weight: bold;
-    border: none;
-    border-radius: 5%;
+    height: 30px;
+    margin: 5px auto;
+    border: 0;
     cursor: pointer;
-    margin: 10px auto;
-    transition: background-color 0.5s;
+    border-bottom: 3px solid var(--secondary-color);
 }
 
-.sessao-login-btn:hover, form input[type=submit]:hover {
-    background-color: var(--primary-color);
+.destaqueTexto input:hover {
+    background-color: black;
+}
+
+/* Botões */
+.btn-itens, .sessao-login-btn, .sessao-login-btn-sair, form input[type=submit], .btn-sair {
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 1px solid #E16A13;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.btn-itens {
+    background-color: #f2a900;
+    color: white;
+}
+
+.btn-itens:hover, .sessao-login-btn:hover, form input[type=submit]:hover, .sessao-login-btn-sair:hover {
+    background-color: #E16A13;
+    color: white;
+}
+
+.btn-sair {
+    background-color: rgba(255, 128, 0, 0.52);
+    color: white;
+    border: #000203;
+    font-size: 12px;
+}
+
+.sessao-login-btn {
+    background-color: #DE884A;
+    width: 80%;
+    max-width: 100px;
+    text-align: center;
+    margin: 10px auto;
 }
 
 .sessao-login-btn-sair {
@@ -349,19 +157,10 @@ button[type="submit"]:hover {
     padding: 10px 20px;
     width: 100px;
     max-width: 50px;
-    text-align: center;
-    font-weight: bold;
-    border: none;
-    border-radius: 5%;
-    cursor: pointer;
     margin: 10px auto;
-    transition: .5s;
 }
 
-.sessao-login-btn-sair:hover {
-    background-color: var(--primary-color);
-}
-
+/* Sucesso e Erro */
 .success, .error {
     padding: 15px;
     color: #000;
@@ -369,6 +168,7 @@ button[type="submit"]:hover {
     margin-top: 15px;
     text-align: center;
     border-radius: 5px;
+    font-family: 'Cabin', sans-serif;
 }
 
 .success {
@@ -381,7 +181,83 @@ button[type="submit"]:hover {
     border: 1px solid #dc3545;
 }
 
-.success,
-.error {
-    font-family: 'Cabin', sans-serif;
+/* Foco nos Inputs */
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="file"]:focus,
+form input[type="password"]:focus,
+textarea:focus {
+    border-color: #E16A13;
+    outline: none;
+}
+
+/* Estilos adicionais para inputs e selects */
+form input[type="text"], form input[type="email"], form input[type="file"], form input[type="password"], textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #DE884A;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* Media Queries */
+
+/* Para dispositivos grandes */
+@media (max-width: 1200px) {
+    .container-login, #container, .container-listagem-for, .container-cadastro {
+        width: 90%; /* Menos largura em telas grandes */
+        max-width: 1000px; /* Definindo o tamanho máximo para telas grandes */
+        padding: 5%;
+    }
+}
+
+/* Para tablets */
+@media (max-width: 768px) {
+    .container-login, #container, .container-listagem-for, .container-cadastro {
+        width: 90%; /* Ajusta a largura */
+        padding: 10%;
+        max-width: 90%; /* Garante que não ultrapasse a tela */
+    }
+
+    .logo-natura {
+        max-width: 120px;
+    }
+
+    .btn-itens {
+        width: 100%;
+        font-size: 14px;
+    }
+}
+
+/* Para smartphones */
+@media (max-width: 480px) {
+    .container-login, #container, .container-listagem-for, .container-cadastro {
+        width: 100%; /* Garante que ocupe toda a largura da tela */
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .logo-natura {
+        max-width: 80px;
+    }
+
+    .container-cadastro {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-itens {
+        font-size: 12px;
+    }
+
+    .btn-sair {
+        font-size: 10px;
+    }
+
+    .container-cadastro input,
+    .container-cadastro textarea {
+        font-size: 14px;
+    }
 }
