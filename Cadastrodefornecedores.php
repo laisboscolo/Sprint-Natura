@@ -6,6 +6,61 @@ include('conexao.php');
 
 // Função para redimensionar e salvar a imagem
 function redimensionarESalvarImagem($arquivo, $largura = 80, $altura = 80) {
+    // Verifica se o arquivo foi enviado sem erro
+    if ($arquivo['error'] !== 0) {
+        return "Erro no envio da imagem.";
+    }
+
+    // Verifica o tipo do arquivo
+    $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
+    $tipos_permitidos = ['jpg', 'jpeg', 'png', 'gif'];
+    
+    if (!in_array($extensao, $tipos_permitidos)) {
+        return "Extensão de imagem não permitida. Apenas jpg, jpeg, png e gif são aceitos.";
+    }
+
+    // Define o diretório para onde a imagem será salva
+    $diretorio = 'img/uploads/';
+    if (!is_dir($diretorio)) {
+        mkdir($diretorio, 0777, true);
+    }
+
+    // Cria um nome único para o arquivo
+    $novo_nome = uniqid('img_', true) . '.' . $extensao;
+    $caminho_imagem = $diretorio . $novo_nome;
+
+    // Faz o upload da imagem
+    if (move_uploaded_file($arquivo['tmp_name'], $caminho_imagem)) {
+        // Aqui podemos redimensionar a imagem, se necessário
+        if (in_array($extensao, ['jpg', 'jpeg'])) {
+            $imagem = imagecreatefromjpeg($caminho_imagem);
+        } elseif ($extensao == 'png') {
+            $imagem = imagecreatefrompng($caminho_imagem);
+        } elseif ($extensao == 'gif') {
+            $imagem = imagecreatefromgif($caminho_imagem);
+        }
+
+        // Redimensiona a imagem
+        $imagem_redimensionada = imagecreatetruecolor($largura, $altura);
+        imagecopyresampled($imagem_redimensionada, $imagem, 0, 0, 0, 0, $largura, $altura, imagesx($imagem), imagesy($imagem));
+
+        // Salva a imagem redimensionada
+        if (in_array($extensao, ['jpg', 'jpeg'])) {
+            imagejpeg($imagem_redimensionada, $caminho_imagem);
+        } elseif ($extensao == 'png') {
+            imagepng($imagem_redimensionada, $caminho_imagem);
+        } elseif ($extensao == 'gif') {
+            imagegif($imagem_redimensionada, $caminho_imagem);
+        }
+
+        // Libera a memória
+        imagedestroy($imagem);
+        imagedestroy($imagem_redimensionada);
+
+        return 'img/uploads/' . $novo_nome; // Retorna o caminho relativo da imagem
+    } else {
+        return "Falha ao mover o arquivo para o diretório de destino.";
+    }
 }
 
 // Verifica se o formulário foi enviado
@@ -17,9 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Processa o upload da imagem
     $imagem = "";
-    if(isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
+    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
         $resultado_upload = redimensionarESalvarImagem($_FILES['imagem']);
-        if(strpos($resultado_upload, 'img/') === 0) {
+        if (strpos($resultado_upload, 'img/') === 0) {
             $imagem = $resultado_upload;
         } else {
             $mensagem_erro = $resultado_upload;
@@ -30,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($id) {
         // Se o ID existe, é uma atualização
         $sql = "UPDATE fornecedores SET nome='$nome', email='$email', telefone='$telefone'";
-        if($imagem) {
+        if ($imagem) {
             $sql .= ", imagem='$imagem'";
         }
         $sql .= " WHERE id='$id'";
@@ -99,54 +154,50 @@ if (isset($_GET['edit_id'])) {
         <h2>Cadastro de Fornecedor</h2>
         <!-- Formulário para cadastro/edição de fornecedor -->
         <form method="post" action="" enctype="multipart/form-data">
-    <!-- Hidden field for the ID of the supplier -->
-    <input type="hidden" name="id" value="<?php echo $fornecedor['id'] ?? ''; ?>">
-    
-    <!-- Name Input -->
-    <div class="input-container">
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome" value="<?php echo $fornecedor['nome'] ?? ''; ?>" required>
-    </div>
+            <!-- Hidden field for the ID of the supplier -->
+            <input type="hidden" name="id" value="<?php echo $fornecedor['id'] ?? ''; ?>">
+            
+            <!-- Name Input -->
+            <div class="input-container">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" value="<?php echo $fornecedor['nome'] ?? ''; ?>" required>
+            </div>
 
-    <!-- Email Input -->
-    <div class="input-container">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" value="<?php echo $fornecedor['email'] ?? ''; ?>" required>
-    </div>
+            <!-- Email Input -->
+            <div class="input-container">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" value="<?php echo $fornecedor['email'] ?? ''; ?>" required>
+            </div>
 
-    <!-- Phone Input -->
-    <div class="input-container">
-        <label for="telefone">Telefone:</label>
-        <input type="text" name="telefone" id="telefone" value="<?php echo $fornecedor['telefone'] ?? ''; ?>">
-    </div>
+            <!-- Phone Input -->
+            <div class="input-container">
+                <label for="telefone">Telefone:</label>
+                <input type="text" name="telefone" id="telefone" value="<?php echo $fornecedor['telefone'] ?? ''; ?>">
+            </div>
 
-    <!-- Image Upload -->
-    <div class="input-container" id="cadastro">
-        <label for="imagem">Imagem:</label>
-        <input type="file" name="imagem" id="imagem" accept="image/*">
-        
-        <?php if (isset($fornecedor['imagem']) && $fornecedor['imagem']): ?>
-    <div class="current-image">
-        <img src="<?php echo $fornecedor['imagem']; ?>" alt="Imagem atual do fornecedor" class="update-image">
-        <p>Imagem atual do fornecedor</p>
-    </div>
-<?php endif; ?>
+            <!-- Image Upload -->
+            <div class="input-container" id="cadastro">
+                <label for="imagem">Imagem:</label>
+                <input type="file" name="imagem" id="imagem" accept="image/*">
+                
+                <?php if (isset($fornecedor['imagem']) && $fornecedor['imagem']): ?>
+                    <div class="current-image">
+                        <img src="<?php echo $fornecedor['imagem']; ?>" alt="Imagem atual do fornecedor" class="update-image">
+                        <p>Imagem atual do fornecedor</p>
+                    </div>
+                <?php endif; ?>
+            </div>
 
-</div>
-
-<form method="post" action="">
-    <!-- Aqui pode ir o restante do seu código do formulário -->
-    <button type="submit"><?php echo $fornecedor ? 'Atualizar' : 'Cadastrar'; ?></button>
-</form>
+            <button type="submit"><?php echo $fornecedor ? 'Atualizar' : 'Cadastrar'; ?></button>
+        </form>
 
         <!-- Exibe mensagens de sucesso ou erro -->
         <?php
         if (isset($mensagem)) echo "<p class='message " . (strpos($mensagem, 'Erro') !== false ? "error" : "success") . "'>$mensagem</p>";
         if (isset($mensagem_erro)) echo "<p class='message error'>$mensagem_erro</p>";
         ?>
-                            </div>
+    </div>
 
-        
     <div id="container-listagem-for"><h2 class="listagem-cadastro">Listagem de Fornecedores</h2>
         <!-- Tabela para listar os fornecedores cadastrados -->
         <table>
@@ -178,9 +229,10 @@ if (isset($_GET['edit_id'])) {
             </tr>
             <?php endwhile; ?>
         </table>
-                    </div>
-        <div class="btn-actions">
-          <a href="index.php" class="sessao-login-btn">Voltar</a>
-        </div>
+    </div>
+
+    <div class="btn-actions">
+        <a href="index.php" class="sessao-login-btn">Voltar</a>
+    </div>
 </body>
 </html>
