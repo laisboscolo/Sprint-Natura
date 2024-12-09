@@ -54,8 +54,8 @@ Por meio dos codigos apresentados no repositótio, criamos:
 
 # Tela de Login:
 
+![Captura de tela 2024-12-09 093825](https://github.com/user-attachments/assets/79ec0c79-623b-40ec-b849-0eb9de901eee)
 
-![image](https://github.com/user-attachments/assets/f23a4f74-0b9c-4575-8df1-0ffcf41d26bc)
 
 (obs. site funciona apenas para aqueles que trabalham e/ou são cadastrados pelo banco de dados, não aberto a qualquer um.)
 
